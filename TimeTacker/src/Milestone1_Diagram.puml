@@ -1,0 +1,12 @@
+@startuml
+
+abstract class Activity{
+}
+
+class Task{
+}
+
+class Project{
+}
+
+@enduml
