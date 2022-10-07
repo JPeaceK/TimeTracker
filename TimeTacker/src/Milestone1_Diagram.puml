@@ -1,12 +1,58 @@
 @startuml
-
 abstract class Activity{
-}
-
-class Task{
+# name: String
++ {abstract}calculateTime(): DateTime
 }
 
 class Project{
+- name: String
++ calculateTime(): DateTime
+
 }
+
+class Task{
+-name: String
+- intervals: Interval[]
++ calculateTime(): DateTime
+}
+
+class Interval{
+- initialDate: Date
+- finalDate: Date
+}
+
+
+
+
+
+class User{
++ Main()
+}
+
+
+
+
+package java.util.Observer <<Folder>>{
+
+class Clock{
+- timer: Timer
+- dateTime: DateTime
++ startTimer()
+- tick()
+}
+class WidgetClock{
++ draw()
+}
+
+
+}
+
+Task --|> Activity
+Project --|> Activity
+Project o--> Activity
+Clock o--> "1..*" WidgetClock
+Task -->"1..*" Interval
+Interval --> "1" Clock
+User --> "1..*" Activity
 
 @enduml
