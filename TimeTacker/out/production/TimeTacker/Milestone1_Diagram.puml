@@ -1,0 +1,85 @@
+@startuml
+abstract class Activity{
+# name: String
++ {abstract}calculateTime(): DateTime
+}
+
+class Project{
+- name: String
+- totalTime: LocalDateTime
+- activities: Activity []
++ calculateTime(): DateTime
++ createNewProject(name:String)
++ createNewTask(name:String)
+
+}
+
+class Task{
+- totalTime: LocalDateTime
+- name: String
+- running: boolean
+- started: boolean
+- intervals: Interval[]
++ calculateTime(): LocalDateTime
++ startTime(): void
++ stopTime(): void
+
+}
+
+class Interval{
+- initialDate: LocalDateTime
+- finalDate: LocalDateTime
+- timeInterval: LocalDateTime
+
++ calculateInterval(): void
+}
+
+
+
+
+
+class User{
++ Main()
+}
+
+
+class ClockWidget{
+
++draw()
+}
+
+class Clock
+{
+-timer: Timer
+-dateTime: DateTime
++StartTimer()
+-tick()
+
+}
+
+package java.util <<Folder>>{
+
+abstract class Observable{
++addObserver(ob:Observer)
++deleteObserver(ob:Observer)
++setChanged()
++notifyObservers(arg0:Observable, arg1: Object)
+}
+interface Observer{
++ update(arg0:Observable, arg1: Object)
+}
+
+
+}
+
+Task --|> Activity
+Project --|> Activity
+Project o--> Activity
+Observable o--> "1..*" Observer
+ClockWidget ..|> Observer
+Clock --|> Observable 
+Task -->"1..*" Interval
+Interval --> "1" Clock
+User --> "1..*" Project
+
+@enduml

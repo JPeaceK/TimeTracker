@@ -1,9 +1,17 @@
+import java.time.*;
 public class Interval {
-    private Date initialDate(){
-        return null;
+    private LocalDateTime initialDate;
+    private LocalDateTime finalDate;
+    private LocalDateTime timeInterval;
+
+    public void calculateInterval(){
+
     }
 
-    private Date finalDate(){
-        return null;
+    public void setFinalDate() {
+        this.finalDate = LocalDateTime.now();
     }
+
+    public LocalDateTime getFinalDate() { return this.finalDate;}
+
 }
