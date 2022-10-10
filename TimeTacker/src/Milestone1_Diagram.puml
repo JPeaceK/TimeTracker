@@ -6,19 +6,32 @@ abstract class Activity{
 
 class Project{
 - name: String
+- totalTime: LocalDateTime
+- activities: Activity []
 + calculateTime(): DateTime
++ createNewProject(name:String)
++ createNewTask(name:String)
 
 }
 
 class Task{
--name: String
+- totalTime: LocalDateTime
+- name: String
+- running: boolean
+- started: boolean
 - intervals: Interval[]
-+ calculateTime(): DateTime
++ calculateTime(): LocalDateTime
++ startTime(): void
++ stopTime(): void
+
 }
 
 class Interval{
-- initialDate: Date
-- finalDate: Date
+- initialDate: LocalDateTime
+- finalDate: LocalDateTime
+- timeInterval: LocalDateTime
+
++ calculateInterval(): void
 }
 
 
@@ -30,18 +43,30 @@ class User{
 }
 
 
+class ClockWidget{
 
-
-package java.util.Observer <<Folder>>{
-
-class Clock{
-- timer: Timer
-- dateTime: DateTime
-+ startTimer()
-- tick()
++draw()
 }
-class WidgetClock{
-+ draw()
+
+class Clock
+{
+-timer: Timer
+-dateTime: DateTime
++StartTimer()
+-tick()
+
+}
+
+package java.util <<Folder>>{
+
+abstract class Observable{
++addObserver(ob:Observer)
++deleteObserver(ob:Observer)
++setChanged()
++notifyObservers(arg0:Observable, arg1: Object)
+}
+interface Observer{
++ update(arg0:Observable, arg1: Object)
 }
 
 
@@ -50,9 +75,11 @@ class WidgetClock{
 Task --|> Activity
 Project --|> Activity
 Project o--> Activity
-Clock o--> "1..*" WidgetClock
+Observable o--> "1..*" Observer
+ClockWidget ..|> Observer
+Clock --|> Observable 
 Task -->"1..*" Interval
 Interval --> "1" Clock
-User --> "1..*" Activity
+User --> "1..*" Project
 
 @enduml
