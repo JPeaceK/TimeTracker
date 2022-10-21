@@ -24,9 +24,13 @@ public class Clock extends Observable {
         timer.schedule(timerTask, 0, 1000);
     }
 
-    public Clock getInstance(){
+    public static Clock getInstance(){
         if (clock == null) clock = new Clock();
         return clock;
+    }
+
+    public LocalDateTime getActualTime(){
+        return this.actualTime;
     }
 
 }

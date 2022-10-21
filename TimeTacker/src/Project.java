@@ -17,10 +17,21 @@ public class Project extends Activity {
     public String getName() {return this.name;}
 
     @Override
-    public LocalDateTime getTotalTime() {return this.totalTime;}
+    public long getTotalTime() {return this.totalTime;}
 
     @Override
     public LocalDateTime getInitialDate() {return this.initialDate;}
+
+    @Override
+    public void setFinalTime(LocalDateTime finalTime, long seconds){
+        this.finalTime = finalTime;
+        this.totalTime = seconds;
+    }
+
+    @Override
+    public void start(){
+
+    }
 
     /*
     @Override
@@ -33,5 +44,7 @@ public class Project extends Activity {
     public void acceptVisitor(Visitor visitor){
         visitor.visitProject(this);
     }
+
+
 
 }

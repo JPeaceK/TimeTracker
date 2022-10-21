@@ -7,15 +7,19 @@ public class Main {
         Task t2 = new Task("T2", p1);
         Task t3 = new Task("T3", p2);
 
-        t1.
+        final Clock clock = Clock.getInstance();
+
+        t1.start();
+        t2.start();
 
         System.out.println("ABABABABAB");
-        Printer printer = new Printer(root);
-
         Thread.sleep(4000);
-        t1.start();
+
         Thread.sleep(2000);
-        t2.start();
+
+
+        //printer.visitTask(t1);
+        //printer.visitTask(t2);
 
         System.out.println("AAAAAAAAAAA");
 

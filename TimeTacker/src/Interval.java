@@ -1,20 +1,26 @@
 
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.Observable;
+import java.util.Observer;
 
-public class Interval {
+public class Interval implements Observer{
     private LocalDateTime initialTime;
     private LocalDateTime finalTime;
-    private LocalDateTime timeInterval;
+    private long timeInterval;
     private Clock clock;
 
     private Task father;
+
+    private Printer printer;
 
     public Interval(Task father){
         this.father=father;
         this.initialTime = LocalDateTime.now();
         this.finalTime = null;
-        this.timeInterval = null;
-        this.clock = Clock.getTime();
+        this.timeInterval = 0;
+        this.clock = Clock.getInstance();
+        this.printer = new Printer();
     }
 
     public Task getFather(){return this.father;}
@@ -23,9 +29,20 @@ public class Interval {
 
     public LocalDateTime getFinalTime(){return this.finalTime;}
 
-    public LocalDateTime getTimeInterval(){return this.timeInterval;}
+    public long getTimeInterval(){return this.timeInterval;}
     public void setFinalTime(){
         this.finalTime = LocalDateTime.now();
     }
 
+    public void acceptVisitor(Visitor visitor){
+        visitor.visitInterval(this);
+    }
+
+    @Override
+    public void update(Observable observable, Object arg) {
+        this.timeInterval = Duration.between(this.initialTime.toLocalTime(), clock.getActualTime().toLocalTime()).getSeconds();
+        this.father.setFinalTime(this.finalTime, this.timeInterval);
+        this.finalTime = this.initialTime.plusSeconds(timeInterval);
+        acceptVisitor(printer);
+    }
 }

@@ -3,11 +3,13 @@ import java.util.ArrayList;
 
 public class Task extends Activity {
     private ArrayList<Interval> intervals;
-    private boolean executant;
+    private boolean active;
     private boolean started;
 
     public Task(String name, Activity father){
         super(name, father);
+        this.active=false;
+        this.started=false;
         this.intervals = new ArrayList<>();
     }
 
@@ -18,10 +20,16 @@ public class Task extends Activity {
     public String getName() {return this.name;}
 
     @Override
-    public LocalDateTime getTotalTime() {return this.totalTime;}
+    public long getTotalTime() {return this.totalTime;}
 
     @Override
     public LocalDateTime getInitialDate() {return this.initialDate;}
+
+    @Override
+    public void setFinalTime(LocalDateTime finalTime, long seconds){
+        this.finalTime = finalTime;
+        this.totalTime = seconds;
+    }
 
     /*
     @Override
@@ -31,8 +39,18 @@ public class Task extends Activity {
      */
 
 
+    @Override
     public void start(){
+        this.active = true;
+
+        if (intervals.size() == 0){
+            this.started = true;
+            this.initialDate = clock.getActualTime();
+            this.father.start();
+        }
+
         intervals.add(new Interval(this));
+        clock.addObserver(intervals.get(intervals.size() -1));
     }
 
     public void stopTime(){
