@@ -20,40 +20,33 @@ public class Task extends Activity {
     public String getName() {return this.name;}
 
     @Override
+    public LocalDateTime getFinalTime() {return this.finalTime;}
+
+    @Override
     public long getTotalTime() {return this.totalTime;}
 
     @Override
-    public LocalDateTime getInitialDate() {return this.initialDate;}
+    public LocalDateTime getInitialDate() {return this.initialTime;}
 
     @Override
-    public void setFinalTime(LocalDateTime finalTime, long seconds){
+    public void setFinalAndTotalTime(LocalDateTime finalTime, long seconds){
         this.finalTime = finalTime;
         this.totalTime = seconds;
+        this.father.setFinalAndTotalTime(finalTime, seconds);
     }
-
-    /*
-    @Override
-    public LocalDateTime calculateTime(){
-        return null;
-    }
-     */
-
 
     @Override
     public void start(){
+        this.initialTime = this.clock.getActualTime();
         this.active = true;
-
-        if (intervals.size() == 0){
-            this.started = true;
-            this.initialDate = clock.getActualTime();
-            this.father.start();
-        }
+        this.started = true;
+        this.father.start();
 
         intervals.add(new Interval(this));
         clock.addObserver(intervals.get(intervals.size() -1));
     }
 
-    public void stopTime(){
+    public void stop(){
         int tamany = intervals.size();
         intervals.get(tamany -1).setFinalTime();
     }

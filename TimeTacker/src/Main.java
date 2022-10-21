@@ -10,19 +10,9 @@ public class Main {
         final Clock clock = Clock.getInstance();
 
         t1.start();
-        t2.start();
-
-        System.out.println("ABABABABAB");
         Thread.sleep(4000);
-
-        Thread.sleep(2000);
-
-
-        //printer.visitTask(t1);
-        //printer.visitTask(t2);
-
-        System.out.println("AAAAAAAAAAA");
-
-
+        t2.start();
+        Thread.sleep(4000);
+        t3.start();
     }
 }

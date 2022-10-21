@@ -20,25 +20,23 @@ public class Project extends Activity {
     public long getTotalTime() {return this.totalTime;}
 
     @Override
-    public LocalDateTime getInitialDate() {return this.initialDate;}
+    public LocalDateTime getFinalTime() {return this.finalTime;}
 
     @Override
-    public void setFinalTime(LocalDateTime finalTime, long seconds){
+    public LocalDateTime getInitialDate() {return this.initialTime;}
+
+    @Override
+    public void setFinalAndTotalTime(LocalDateTime finalTime, long seconds){
         this.finalTime = finalTime;
         this.totalTime = seconds;
+        if (this.father != null) this.father.setFinalAndTotalTime(finalTime,seconds);
     }
 
     @Override
     public void start(){
-
+        this.initialTime = this.clock.getActualTime();
+        if (this.father != null) this.father.start();
     }
-
-    /*
-    @Override
-    public LocalDateTime calculateTime(){
-        return null;
-    }
-     */
 
     @Override
     public void acceptVisitor(Visitor visitor){
