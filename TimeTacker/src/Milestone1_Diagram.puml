@@ -43,9 +43,9 @@ class User{
 }
 
 
-class ClockWidget{
-
-+draw()
+class Printer{
+- origin: Activity
++ draw()
 }
 
 class Clock
@@ -76,10 +76,10 @@ Task --|> Activity
 Project --|> Activity
 Project o--> Activity
 Observable o--> "1..*" Observer
-ClockWidget ..|> Observer
+Printer..|> Interval
 Clock --|> Observable 
 Task -->"1..*" Interval
-Interval --> "1" Clock
+Interval --> "1" Observer
 User --> "1..*" Project
 
 @enduml
