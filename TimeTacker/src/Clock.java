@@ -6,8 +6,9 @@ import java.util.TimerTask;
 
 public class Clock extends Observable {
     private LocalDateTime actualTime;
+    private static Clock clock;
 
-    public Clock(){
+    private Clock(){
         super();
         this.actualTime = LocalDateTime.now();
         Timer timer;
@@ -23,8 +24,9 @@ public class Clock extends Observable {
         timer.schedule(timerTask, 0, 1000);
     }
 
-    public static Clock getTime(){
-        return new Clock();
+    public Clock getInstance(){
+        if (clock == null) clock = new Clock();
+        return clock;
     }
 
 }

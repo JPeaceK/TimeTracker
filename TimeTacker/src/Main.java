@@ -7,6 +7,8 @@ public class Main {
         Task t2 = new Task("T2", p1);
         Task t3 = new Task("T3", p2);
 
+        t1.
+
         System.out.println("ABABABABAB");
         Printer printer = new Printer(root);
 

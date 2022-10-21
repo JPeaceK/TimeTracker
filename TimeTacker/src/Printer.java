@@ -17,7 +17,7 @@ public class Printer implements Visitor {
     @Override
     public void visitProject(Project project) {
         System.out.println("Project " + project.getName() + " child of " + project.getFather().getName() + " " + project.getInitialDate() + " " + "MISSING CURRENT TIME" + " " + project.getTotalTime());
-        if(project.getFather() != null) project.getFather().acceptVisitor(this);
+        //if(project.getFather() != null) project.getFather().acceptVisitor(this);
 
     }
 
