@@ -1,17 +1,31 @@
-import java.time.*;
+
+import java.time.LocalDateTime;
+
 public class Interval {
-    private LocalDateTime initialDate;
-    private LocalDateTime finalDate;
+    private LocalDateTime initialTime;
+    private LocalDateTime finalTime;
     private LocalDateTime timeInterval;
+    private Clock clock;
 
-    public void calculateInterval(){
+    private Task father;
 
+    public Interval(Task father){
+        this.father=father;
+        this.initialTime = LocalDateTime.now();
+        this.finalTime = null;
+        this.timeInterval = null;
+        this.clock = Clock.getTime();
     }
 
-    public void setFinalDate() {
-        this.finalDate = LocalDateTime.now();
-    }
+    public Task getFather(){return this.father;}
 
-    public LocalDateTime getFinalDate() { return this.finalDate;}
+    public LocalDateTime getInitialTime(){return this.initialTime;}
+
+    public LocalDateTime getFinalTime(){return this.finalTime;}
+
+    public LocalDateTime getTimeInterval(){return this.timeInterval;}
+    public void setFinalTime(){
+        this.finalTime = LocalDateTime.now();
+    }
 
 }
