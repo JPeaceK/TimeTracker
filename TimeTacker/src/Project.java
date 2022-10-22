@@ -28,7 +28,7 @@ public class Project extends Activity {
     @Override
     public void setFinalAndTotalTime(LocalDateTime finalTime, long seconds){
         this.finalTime = finalTime;
-        this.totalTime = seconds;
+        this.totalTime = this.totalTime + seconds;
         if (this.father != null) this.father.setFinalAndTotalTime(finalTime,seconds);
     }
 

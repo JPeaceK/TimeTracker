@@ -41,8 +41,16 @@ public class Interval implements Observer{
     @Override
     public void update(Observable observable, Object arg) {
         this.timeInterval = Duration.between(this.initialTime.toLocalTime(), clock.getActualTime().toLocalTime()).getSeconds();
-        this.father.setFinalAndTotalTime(this.finalTime, this.timeInterval);
+
+        long timeIncremented = 0;
+        if (this.finalTime == null){
+            timeIncremented = this.timeInterval;
+        }else{
+            timeIncremented = Duration.between(this.finalTime.toLocalTime(), clock.getActualTime().toLocalTime()).getSeconds();
+        }
+
         this.finalTime = this.initialTime.plusSeconds(timeInterval);
+        this.father.setFinalAndTotalTime(this.finalTime, timeIncremented);
         acceptVisitor(printer);
     }
 }

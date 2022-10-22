@@ -31,7 +31,7 @@ public class Task extends Activity {
     @Override
     public void setFinalAndTotalTime(LocalDateTime finalTime, long seconds){
         this.finalTime = finalTime;
-        this.totalTime = seconds;
+        this.totalTime = this.totalTime+seconds;
         this.father.setFinalAndTotalTime(finalTime, seconds);
     }
 

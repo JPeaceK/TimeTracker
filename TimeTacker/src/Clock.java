@@ -1,4 +1,3 @@
-import java.sql.Time;
 import java.time.LocalDateTime;
 import java.util.Observable;
 import java.util.Timer;
@@ -11,7 +10,6 @@ public class Clock extends Observable {
     private Clock(){
         super();
         this.actualTime = LocalDateTime.now();
-        Timer timer;
 
         //Thread que canvia el temps del rellotge constantment
         TimerTask timerTask = new TimerTask() {
@@ -22,13 +20,13 @@ public class Clock extends Observable {
             }
         };
 
-        timer = new Timer();
-        timer.schedule(timerTask, 0, 5000);
+        Timer timer = new Timer();
+        timer.schedule(timerTask, 0, 2000);
 
         /*
             La classe TimerTask amb el mètode run() ens permet programar una acció
             La classe Timer amb el mètode schedule() ens permet programar la repetició
-            continua d'aquesta tasca especificant el delay i període de repetició de la tasca
+            continua d'aquesta acció especificant el delay i període de repetició de l'acció
         */
     }
 
