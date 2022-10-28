@@ -25,7 +25,7 @@ public class Task extends Activity {
     @Override
     public long getTotalTime() {return this.totalTime;}
 
-    @i
+    @Override
     public LocalDateTime getInitialDate() {return this.initialTime;}
 
     @Override
