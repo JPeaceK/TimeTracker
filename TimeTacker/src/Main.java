@@ -1,11 +1,5 @@
 public class Main {
     public static void main(String[] args) throws InterruptedException{
-        Project root = new Project("root", null);
-        Project p1 = new Project("P1", root);
-        Project p2 = new Project("P2", root);
-        Task t1 = new Task("T1", root);
-        Task t2 = new Task("T2", p1);
-        Task t3 = new Task("T3", p2);
 
         final Clock clock = Clock.getInstance();
 
@@ -14,5 +8,33 @@ public class Main {
         t2.start();
         Thread.sleep(4000);
         t3.start();
+    }
+
+    public void testB() throws InterruptedException{
+        Project root = new Project("root", null);
+        Task transportation = new Task("transportation", root);
+        Task first_list = new Task("first_list", root);
+        Task second_list = new Task("second_list", root);
+
+        transportation.start();
+        Thread.sleep(4000);
+        transportation.stop();
+        Thread.sleep(2000);
+
+
+        first_list.start();
+        Thread.sleep(6000);
+        second_list.start();
+        Thread.sleep(4000);
+
+        first_list.stop();
+
+        
+
+
+
+
+
+
     }
 }
