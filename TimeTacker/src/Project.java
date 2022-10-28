@@ -34,8 +34,12 @@ public class Project extends Activity {
 
     @Override
     public void start(){
-        this.initialTime = this.clock.getActualTime();
-        if (this.father != null) this.father.start();
+        if(this.initialTime == null){
+            this.initialTime = this.clock.getActualTime();
+        }
+        if (this.father != null) {
+            this.father.start();
+        }
     }
 
     @Override
