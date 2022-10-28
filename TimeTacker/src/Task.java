@@ -25,7 +25,7 @@ public class Task extends Activity {
     @Override
     public long getTotalTime() {return this.totalTime;}
 
-    @Override
+    @i
     public LocalDateTime getInitialDate() {return this.initialTime;}
 
     @Override
@@ -37,11 +37,12 @@ public class Task extends Activity {
 
     @Override
     public void start(){
-        this.initialTime = this.clock.getActualTime();
+        if(this.initialTime == null) {
+            this.initialTime = this.clock.getActualTime();
+        }
         this.active = true;
         this.started = true;
         this.father.start();
-
         intervals.add(new Interval(this));
         clock.addObserver(intervals.get(intervals.size() -1));
     }

@@ -1,4 +1,5 @@
 @startuml
+skinparam classAtributeIconSize 0
 abstract class Activity{
 # name: String
 # initialTime: LocalDateTime
@@ -91,12 +92,12 @@ interface Visitor{
 
 Task --|> Activity
 Project --|> Activity
-Project o--> Activity
+Project o--> "*" Activity
 Observable o--> "1..*" Observer
-Interval "1"-- "1" Printer
+
 Clock --|> Observable 
-Task -->"1..*" Interval
-Interval --> "1" Observer
-Main --> "1..*" Project
+Task -->"0..*" Interval
+Interval ..|> "1" Observer
+
 Printer ..|> Visitor
 @enduml
