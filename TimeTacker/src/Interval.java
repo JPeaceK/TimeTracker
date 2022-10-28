@@ -12,7 +12,6 @@ public class Interval implements Observer{
 
     private Task father;
 
-    private Printer printer;
 
     public Interval(Task father){
         this.father=father;
@@ -20,7 +19,6 @@ public class Interval implements Observer{
         this.finalTime = null;
         this.timeInterval = 0;
         this.clock = Clock.getInstance();
-        this.printer = new Printer();
     }
 
     public Task getFather(){return this.father;}
@@ -51,6 +49,6 @@ public class Interval implements Observer{
 
         this.finalTime = this.initialTime.plusSeconds(timeInterval);
         this.father.setFinalAndTotalTime(this.finalTime, timeIncremented);
-        acceptVisitor(printer);
+        acceptVisitor(new Printer());
     }
 }
