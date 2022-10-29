@@ -1,0 +1,25 @@
+{
+  "root": {
+    "name": "",
+    "initialTime": "",
+    "finalTime": "",
+    "totalTime": "",
+    "activities":{
+      "p1":{
+        "name": "",
+        "initialTime": "",
+        "finalTime": "",
+        "totalTime": "",
+        "activities":{
+      },
+        "p2": {
+          "name": "",
+          "initialTime": "",
+          "finalTime": "",
+          "totalTime": "",
+          "activities":{
+        }
+      }
+    }
+  }
+}

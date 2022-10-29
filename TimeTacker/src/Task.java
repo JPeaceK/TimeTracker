@@ -25,7 +25,7 @@ public class Task extends Activity {
     @Override
     public long getTotalTime() {return this.totalTime;}
 
-    @i
+    @Override
     public LocalDateTime getInitialDate() {return this.initialTime;}
 
     @Override
@@ -48,8 +48,9 @@ public class Task extends Activity {
     }
 
     public void stop(){
-        int tamany = intervals.size();
-        intervals.get(tamany -1).setFinalTime();
+        this.active = false;
+        this.intervals.get(this.intervals.size() -1).setFinalTime();
+        clock.deleteObserver(this.intervals.get(this.intervals.size() -1));
     }
 
     @Override

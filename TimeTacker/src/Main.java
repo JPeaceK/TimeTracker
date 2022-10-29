@@ -5,6 +5,7 @@ public class Main {
         final Clock clock = Clock.getInstance();
         Test tests = new Test();
 
+        tests.testA();
         tests.testB();
     }
 }
