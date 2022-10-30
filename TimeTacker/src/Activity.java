@@ -1,3 +1,5 @@
+import org.json.JSONObject;
+
 import java.time.LocalDateTime;
 
 public abstract class Activity {
@@ -7,9 +9,11 @@ public abstract class Activity {
 
     protected Clock clock;
     protected LocalDateTime finalTime;
-    protected Activity father;
+    protected Project father;
 
-    public Activity(String name, Activity father){
+    protected JSONObject json;
+
+    public Activity(String name, Project father){
         this.clock = Clock.getInstance();
         this.name = name;
         this.father = father;
@@ -23,12 +27,14 @@ public abstract class Activity {
 
     public abstract LocalDateTime getFinalTime();
 
-    public abstract LocalDateTime getInitialDate();
+    public abstract LocalDateTime getInitialTime();
 
     public abstract void acceptVisitor(Visitor visitor);
 
     public abstract void setFinalAndTotalTime(LocalDateTime time, long seconds);
 
     public abstract void start();
+
+    public abstract JSONObject getJSON();
 
 }

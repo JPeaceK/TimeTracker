@@ -1,61 +1,72 @@
 @startuml
+skinparam classAtributeIconSize 0
 abstract class Activity{
 # name: String
-+ {abstract}calculateTime(): DateTime
+# initialTime: LocalDateTime
+# totalTime: long
+# clock: Clock
+# finaltime: LocalDateTime
+# father: Activity
++ {abstract}acceptVisitor(visitor:Visitor): void
++ {abstract}setFinaltime(time:LocalDateTime, seconds:long): void
++ {abstract}start(): void
 }
 
 class Project{
-- name: String
-- totalTime: LocalDateTime
+
 - activities: Activity []
-+ calculateTime(): DateTime
-+ createNewProject(name:String)
-+ createNewTask(name:String)
++ setFinalAndTotalTime(finalTime: LocalDateTime,seconds: long): void
++ start(): void
++ acceptVisitor(visitor:Visitor): void
 
 }
 
 class Task{
-- totalTime: LocalDateTime
-- name: String
-- running: boolean
+- active: boolean
 - started: boolean
 - intervals: Interval[]
-+ calculateTime(): LocalDateTime
-+ startTime(): void
-+ stopTime(): void
++ setFinalAndTotalTime(finalTime:LocalDateTime, seconds:long): void
++ start(): void
++ stop(): void
++ acceptVisitor(visitor:Visitor): void
 
 }
 
 class Interval{
-- initialDate: LocalDateTime
-- finalDate: LocalDateTime
-- timeInterval: LocalDateTime
+- initialTime: LocalDateTime
+- finalTime: LocalDateTime
+- timeInterval: long
+- clock: Clock
+- father: Taskk
+- printer: Printer
 
-+ calculateInterval(): void
++ acceptVisitor(visitor: Visitor);
++ update(observable:Observable, arg:Object): void
 }
 
 
 
 
 
-class User{
+class Main{
 + Main()
 }
 
 
 class Printer{
-- origin: Activity
-+ draw()
++ visitTask(task:Task):void
++ visitProject(project:Project):void
++ visitInterval(interval:Interval):void
 }
 
 class Clock
 {
--timer: Timer
--dateTime: DateTime
-+StartTimer()
--tick()
+- actualTime: LocalDateTime
+- clock: Clock 
++ getInstance(): Clock
 
 }
+
 
 package java.util <<Folder>>{
 
@@ -72,14 +83,21 @@ interface Observer{
 
 }
 
+interface Visitor{
++ VisitTask : void
++ VisitProject: void
++ VisitInterval: void
+
+}
+
 Task --|> Activity
 Project --|> Activity
-Project o--> Activity
+Project o--> "*" Activity
 Observable o--> "1..*" Observer
-Printer..|> Interval
-Clock --|> Observable 
-Task -->"1..*" Interval
-Interval --> "1" Observer
-User --> "1..*" Project
 
+Clock --|> Observable 
+Task -->"0..*" Interval
+Interval ..|> "1" Observer
+
+Printer ..|> Visitor
 @enduml

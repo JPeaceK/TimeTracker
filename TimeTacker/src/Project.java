@@ -1,3 +1,5 @@
+import org.json.JSONObject;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -5,9 +7,11 @@ public class Project extends Activity {
 
     private ArrayList<Activity> activities;
 
-    public Project(String name, Activity father){
+    public Project(String name, Project father){
         super(name, father);
         this.activities = new ArrayList<>();
+
+        if (father != null) father.addActivity(this);
     }
 
     @Override
@@ -23,7 +27,7 @@ public class Project extends Activity {
     public LocalDateTime getFinalTime() {return this.finalTime;}
 
     @Override
-    public LocalDateTime getInitialDate() {return this.initialTime;}
+    public LocalDateTime getInitialTime() {return this.initialTime;}
 
     @Override
     public void setFinalAndTotalTime(LocalDateTime finalTime, long seconds){
@@ -47,6 +51,20 @@ public class Project extends Activity {
         visitor.visitProject(this);
     }
 
+    public JSONObject getJSON(){
+        JSONObject json = new JSONObject();
+        json.put("type", "project");
+        json.put("name", this.getName());
+        json.put("duration", this.getTotalTime());
+        if (this.getInitialTime() != null) json.put("initialDate", this.getInitialTime());
+        else json.put("finalDate", JSONObject.NULL);
+        if (this.getFinalTime() != null) json.put("finalDate", this.getFinalTime());
+        else json.put("finalDate", JSONObject.NULL);
 
+        return json;
+    }
 
+    public ArrayList<Activity> getActivities() { return activities; }
+
+    public void addActivity(Activity activity){ this.getActivities().add(activity); }
 }
