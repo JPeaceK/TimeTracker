@@ -20,6 +20,21 @@ public class Task extends Activity {
     public Activity getFather() {return this.father;}
 
     @Override
+    public void setInitialTime(LocalDateTime name){ this.initialTime = name; }
+
+    @Override
+    public void setTotalTime(long totalTime){ this.totalTime = totalTime; }
+
+    @Override
+    public void setFinalTime(LocalDateTime time){ this.finalTime=time; }
+
+    @Override
+    public void setFather(Project father){ this.father = father; }
+
+    @Override
+    public void setName(String name){ this.name = name; }
+
+    @Override
     public String getName() {return this.name;}
 
     @Override
@@ -54,6 +69,7 @@ public class Task extends Activity {
         this.active = false;
         //this.intervals.get(this.intervals.size() -1).updateTime();
         this.intervals.get(this.intervals.size() -1).setActive(false);
+        this.intervals.get(this.intervals.size() -1).setFinalTime();
         clock.deleteObserver(this.intervals.get(this.intervals.size() -1));
     }
 
@@ -64,21 +80,9 @@ public class Task extends Activity {
 
     public boolean getActive(){return this.active;}
 
-
-    public JSONObject getJSON(){
-        JSONObject json = new JSONObject();
-        json.put("type", "task");
-        json.put("name", this.getName());
-        json.put("duration", this.getTotalTime());
-        if (this.getInitialTime() != null) json.put("initialDate", this.getInitialTime());
-        else json.put("finalDate", JSONObject.NULL);
-        if (this.getFinalTime() != null) json.put("initialDate", this.getFinalTime());
-        else json.put("finalDate", JSONObject.NULL);
-        json.put("active", this.getActive());
-
-        return json;
-    }
-
-
     public ArrayList<Interval> getIntervals(){ return this.intervals; }
+
+    public void setActive(boolean active) { this.active = active; }
+
+    public void setIntervals(ArrayList<Interval> intervals) {this.intervals = intervals;}
 }

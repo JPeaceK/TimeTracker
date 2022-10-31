@@ -18,6 +18,21 @@ public class Project extends Activity {
     public Activity getFather() {return this.father;}
 
     @Override
+    public void setInitialTime(LocalDateTime name){ this.initialTime = name; }
+
+    @Override
+    public void setTotalTime(long totalTime){ this.totalTime = totalTime; }
+
+    @Override
+    public void setFinalTime(LocalDateTime time){ this.finalTime=time; }
+
+    @Override
+    public void setFather(Project father){ this.father = father; }
+
+    @Override
+    public void setName(String name){ this.name = name; }
+
+    @Override
     public String getName() {return this.name;}
 
     @Override
@@ -49,19 +64,6 @@ public class Project extends Activity {
     @Override
     public void acceptVisitor(Visitor visitor){
         visitor.visitProject(this);
-    }
-
-    public JSONObject getJSON(){
-        JSONObject json = new JSONObject();
-        json.put("type", "project");
-        json.put("name", this.getName());
-        json.put("duration", this.getTotalTime());
-        if (this.getInitialTime() != null) json.put("initialDate", this.getInitialTime());
-        else json.put("finalDate", JSONObject.NULL);
-        if (this.getFinalTime() != null) json.put("finalDate", this.getFinalTime());
-        else json.put("finalDate", JSONObject.NULL);
-
-        return json;
     }
 
     public ArrayList<Activity> getActivities() { return activities; }

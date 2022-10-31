@@ -57,16 +57,6 @@ public class Interval implements Observer{
 
     public boolean getActive(){return this.active;}
 
-    public JSONObject getJSON(){
-        JSONObject json = new JSONObject();
-        json.put("type", "task");
-        json.put("duration", this.getTimeInterval());
-        if (this.getInitialTime() != null) json.put("initialDate", this.getInitialTime());
-        else json.put("finalDate", JSONObject.NULL);
-        if (this.getFinalTime() != null) json.put("initialDate", this.getFinalTime());
-        else json.put("finalDate", JSONObject.NULL);
-        json.put("active", this.getActive());
+    public void setFinalTime(){ this.finalTime = clock.getActualTime(); }
 
-        return json;
-    }
 }
