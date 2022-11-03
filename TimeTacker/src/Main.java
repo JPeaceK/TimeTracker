@@ -16,34 +16,35 @@ public class Main {
             Task read_handout = new Task("read_handout", time_tracker);
             Task first_milestone = new Task("first_milestone", time_tracker);
 
+            final Clock clock = Clock.getInstance();
 
-
-            System.out.println("\nTransportation starts\n");
+            Thread.sleep(1500);
+            System.out.println("Transportation starts");
             transportation.start();
-            Thread.sleep(4000);
+            Thread.sleep(6000);
             transportation.stop();
-            System.out.println("\nTransportation stops\n");
+            System.out.println("Transportation stops");
 
             Thread.sleep(2000);
 
-            System.out.println("\nFirst_list starts\n");
+            System.out.println("First_list starts");
             first_list.start();
             Thread.sleep(6000);
-            System.out.println("\nSecond_list starts\n");
+            System.out.println("Second_list starts");
             second_list.start();
             Thread.sleep(4000);
 
-            System.out.println("\nFirst_list stops\n");
+            System.out.println("First_list stops");
             first_list.stop();
             Thread.sleep(2000);
-            System.out.println("\nSecond_list stops\n");
+            System.out.println("Second_list stops");
             second_list.stop();
             Thread.sleep(2000);
 
-            System.out.println("\nTransportation starts\n");
+            System.out.println("Transportation start");
             transportation.start();
             Thread.sleep(4000);
-            System.out.println("\nTransportation stops\n");
+            System.out.println("Transportation stops");
             transportation.stop();
 
             Thread.sleep(5000);
@@ -73,13 +74,26 @@ public class Main {
         Task second_list = new Task("second_list", problems);
         Task read_handout = new Task("read_handout", time_tracker);
         Task first_milestone = new Task("first_milestone", time_tracker);
+
+        first_list.acceptVisitor(new testA());
+        second_list.acceptVisitor(new testA());
+        read_handout.acceptVisitor(new testA());
+        first_milestone.acceptVisitor(new testA());
+
+    }
+
+    public static void testLoad(){
+        Load loader = new Load("data");
+        Project root = loader.load();
+        //root.acceptVisitor(new testA());
     }
 
 
 
     public static void main(String[] args) throws InterruptedException{
-        final Clock clock = Clock.getInstance();
+
         //testA();
-        testB();
+        //testB(); //en aquest test es prova el saver també.
+        testLoad();
     }
 }

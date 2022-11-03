@@ -27,7 +27,27 @@ public class Interval implements Observer{
         this.active = true;
     }
 
+    public Interval(){
+        this.father=null;
+        this.initialTime = null;
+        this.finalTime = null;
+        this.timeInterval = 0;
+        this.clock = null;
+        this.active = false;
+    }
+
     public Task getFather(){return this.father;}
+
+    public void setInitialTime(LocalDateTime name){ this.initialTime = name; }
+
+
+    public void setTotalTime(long totalTime){ this.timeInterval = totalTime; }
+
+
+    public void setFinalTime(LocalDateTime time){ this.finalTime=time; }
+
+
+    public void setFather(Task father){ this.father = father; }
 
     public LocalDateTime getInitialTime(){return this.initialTime;}
 

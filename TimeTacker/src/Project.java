@@ -14,8 +14,17 @@ public class Project extends Activity {
         if (father != null) father.addActivity(this);
     }
 
+    public Project(){
+        super (null, null);
+        this.activities = new ArrayList<>();
+        if (this.father != null) this.father.addActivity(this);
+    }
+
+
     @Override
     public Activity getFather() {return this.father;}
+
+    public void setActivities(ArrayList<Activity> activities){ this.activities = activities; }
 
     @Override
     public void setInitialTime(LocalDateTime name){ this.initialTime = name; }

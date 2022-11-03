@@ -16,6 +16,14 @@ public class Task extends Activity {
         this.father.addActivity(this);
     }
 
+    public Task(){
+        super(null,null);
+        this.active=false;
+        this.started=false;
+        this.intervals = new ArrayList<>();
+        this.father.addActivity(this);
+    }
+
     @Override
     public Activity getFather() {return this.father;}
 
