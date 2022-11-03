@@ -1,3 +1,7 @@
+/*  
+ *  
+ */
+
 public class Printer implements Visitor {
 
     @Override
@@ -13,7 +17,6 @@ public class Printer implements Visitor {
                 + project.getFinalTime() + "\t" + project.getTotalTime());
         if (project.getFather() != null)
             project.getFather().acceptVisitor(this);
-        // System.out.println("\n");
     }
 
     @Override

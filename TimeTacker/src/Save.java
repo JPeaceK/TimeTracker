@@ -1,3 +1,6 @@
+/*  Save class is designed to save a JSON file with information that we will load when application restarts. 
+ *  It will save all atributes of Activities and Intervals.
+ */ 
 
 import org.json.JSONObject;
 import java.io.FileWriter;
@@ -22,7 +25,7 @@ public class Save implements Visitor {
         }
     }
 
-    // S'ha de guardar tot l'arbre, per aixo volem que s'accepti ROOT
+    // We want to accept ROOT to sabe the whole tree.
     @Override
     public void visitTask(Task task) {
         JSONObject json = new JSONObject();

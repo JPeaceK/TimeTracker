@@ -1,3 +1,7 @@
+/* testA class is implemented to make the testA, explained on Apendix A.
+ *
+ */
+
 public class testA implements Visitor {
 
     @Override

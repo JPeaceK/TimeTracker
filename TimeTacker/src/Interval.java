@@ -1,3 +1,8 @@
+/*  Interval class is responsible to get the information about total time of activities.
+ *  When you start a task for the first time, it creates an interval that has the initial time of the task.
+ *  When you stop a task, the interval terminates with a final date.
+ *  When you start again a class, it creates an interval with a new initial time.
+ */
 
 import org.json.JSONObject;
 

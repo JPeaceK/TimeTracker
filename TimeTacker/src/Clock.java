@@ -1,3 +1,9 @@
+/*  Clock class is part of the implementation of Singleton creational Pattern.
+ *  The unic instance of this class will be the Timer of the whole app.
+ *  The implementation of singleton is Lazy type.
+ *  It's part of the Observer pattern, being the Observable object that notify tasks when it receives a tick.
+ */
+
 import java.time.LocalDateTime;
 import java.util.Observable;
 import java.util.Timer;
@@ -11,7 +17,7 @@ public class Clock extends Observable {
         super();
         this.actualTime = LocalDateTime.now();
 
-        // Thread que canvia el temps del rellotge constantment
+        // Thread that changes Clock time constantly.
         TimerTask timerTask = new TimerTask() {
             public void run() {
                 actualTime = LocalDateTime.now();
@@ -24,14 +30,14 @@ public class Clock extends Observable {
         timer.schedule(timerTask, 0, 2000);
 
         /*
-         * La classe TimerTask amb el mètode run() ens permet programar una acció La
-         * classe Timer amb el mètode schedule() ens permet programar la repetició
-         * continua d'aquesta acció especificant el delay i període de repetició de
-         * l'acció
+         * The TimerTask class with the run() method allows us to schedule an action The
+         * Timer class with the schedule() method allows us to schedule the continuous
+         * repetition of this action by specifying the delay and repetition period of
+         * the action
          */
     }
 
-    public static Clock getInstance() { // Aplicació del singleton
+    public static Clock getInstance() { // Singleton aplication
         if (clock == null)
             clock = new Clock();
         return clock;

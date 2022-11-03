@@ -92,7 +92,7 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
 
         testA();
-        // testB(); //en aquest test es prova el saver també.
+        // testB(); //Saver test implemented too.
         // testLoad();
     }
 }

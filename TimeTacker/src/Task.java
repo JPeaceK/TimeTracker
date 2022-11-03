@@ -1,3 +1,7 @@
+/*
+ * 
+ */
+
 import org.json.JSONObject;
 
 import java.time.LocalDateTime;
@@ -21,7 +25,6 @@ public class Task extends Activity {
         this.active = false;
         this.started = false;
         this.intervals = new ArrayList<>();
-        // this.father.addActivity(this);
     }
 
     @Override
@@ -95,7 +98,6 @@ public class Task extends Activity {
 
     public void stop() {
         this.active = false;
-        // this.intervals.get(this.intervals.size() -1).updateTime();
         this.intervals.get(this.intervals.size() - 1).setActive(false);
         this.intervals.get(this.intervals.size() - 1).setFinalTime();
         clock.deleteObserver(this.intervals.get(this.intervals.size() - 1));

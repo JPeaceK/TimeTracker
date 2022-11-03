@@ -1,3 +1,8 @@
+/*  Load class is designed to be able to load a JSON file, previously saved.
+ *  This gives to the application the capacity to restart and keep the information before it closes.
+ *  We will be able to load all atributes of Activities and Intervals.
+ */ 
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
