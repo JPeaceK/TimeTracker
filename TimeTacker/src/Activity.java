@@ -11,7 +11,7 @@ public abstract class Activity {
     protected LocalDateTime finalTime;
     protected Project father;
 
-    public Activity(String name, Project father){
+    public Activity(String name, Project father) {
         this.clock = Clock.getInstance();
         this.name = name;
         this.father = father;
@@ -20,12 +20,19 @@ public abstract class Activity {
     }
 
     public abstract Activity getFather();
+
     public abstract void setName(String name);
+
     public abstract void setInitialTime(LocalDateTime time);
+
     public abstract void setTotalTime(long totalTime);
+
     public abstract void setFinalTime(LocalDateTime time);
+
     public abstract void setFather(Project father);
+
     public abstract String getName();
+
     public abstract long getTotalTime();
 
     public abstract LocalDateTime getFinalTime();
