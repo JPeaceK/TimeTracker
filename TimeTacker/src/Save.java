@@ -31,13 +31,11 @@ public class Save implements Visitor{
         json.put("name", task.getName());
         json.put("totalTime", task.getTotalTime());
         if (task.getInitialTime() != null) json.put("initialTime", task.getInitialTime());
-        else json.put("finalTime", JSONObject.NULL);
+        else json.put("initialTime", JSONObject.NULL);
         if (task.getFinalTime() != null) json.put("finalTime", task.getFinalTime());
         else json.put("finalTime", JSONObject.NULL);
 
         json.put("active", task.getActive());
-
-
         JSONArray intervals = new JSONArray();
 
         for (Interval interval : task.getIntervals()){
@@ -58,7 +56,7 @@ public class Save implements Visitor{
         json.put("name", project.getName());
         json.put("totalTime", project.getTotalTime());
         if (project.getInitialTime() != null) json.put("initialTime", project.getInitialTime());
-        else json.put("finalTime", JSONObject.NULL);
+        else json.put("initialTime", JSONObject.NULL);
         if (project.getFinalTime() != null) json.put("finalTime", project.getFinalTime());
         else json.put("finalTime", JSONObject.NULL);
         JSONArray activities = new JSONArray();
@@ -82,7 +80,7 @@ public class Save implements Visitor{
         json.put("type", "interval");
         json.put("totalTime", interval.getTimeInterval());
         if (interval.getInitialTime() != null) json.put("initialTime", interval.getInitialTime());
-        else json.put("finalTime", JSONObject.NULL);
+        else json.put("initialTime", JSONObject.NULL);
         if (interval.getFinalTime() != null) json.put("finalTime", interval.getFinalTime());
         else json.put("finalTime", JSONObject.NULL);
         json.put("active", interval.getActive());

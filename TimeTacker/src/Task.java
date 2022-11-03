@@ -21,7 +21,7 @@ public class Task extends Activity {
         this.active=false;
         this.started=false;
         this.intervals = new ArrayList<>();
-        this.father.addActivity(this);
+        //this.father.addActivity(this);
     }
 
     @Override

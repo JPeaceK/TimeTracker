@@ -11,13 +11,13 @@ public class Project extends Activity {
         super(name, father);
         this.activities = new ArrayList<>();
 
-        if (father != null) father.addActivity(this);
+        if (this.father != null) this.father.addActivity(this);
     }
 
     public Project(){
         super (null, null);
         this.activities = new ArrayList<>();
-        if (this.father != null) this.father.addActivity(this);
+        //if (this.father != null) this.father.addActivity(this);
     }
 
 

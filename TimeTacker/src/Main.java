@@ -85,15 +85,19 @@ public class Main {
     public static void testLoad(){
         Load loader = new Load("data");
         Project root = loader.load();
-        //root.acceptVisitor(new testA());
+
+        int size = root.getActivities().size();
+
+        root.getActivities().get(size -1).start();
+
     }
 
 
 
     public static void main(String[] args) throws InterruptedException{
 
-        //testA();
+        testA();
         //testB(); //en aquest test es prova el saver també.
-        testLoad();
+        //testLoad();
     }
 }

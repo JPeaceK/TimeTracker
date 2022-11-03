@@ -35,7 +35,11 @@ public class Load implements Visitor{
 
     @Override
     public void visitTask(Task task) {
+
+
         task.setName(jsonTree.getString("name"));
+
+        System.out.println(task.getName());
 
         task.setTotalTime(jsonTree.getLong("totalTime"));
 
@@ -46,25 +50,38 @@ public class Load implements Visitor{
         else task.setFinalTime(LocalDateTime.parse(jsonTree.getString("finalTime")));
 
         task.setActive(jsonTree.getBoolean("active"));
+        task.setFather((Project) this.father);
 
         ArrayList<Interval> intervals = new ArrayList<>();
 
-        for (int i = 0; i<jsonTree.getJSONArray("intervals").length(); i++){
-            this.jsonTree = (JSONObject) jsonTree.getJSONArray("intervals").get(i);
-            Interval interval = new Interval();
+        this.father = task;
 
-            interval.acceptVisitor(this);
-            intervals.add(interval);
+        int size = this.jsonTree.getJSONArray("intervals").length();
+
+        if (size>0){
+            JSONArray intervalsJSON = jsonTree.getJSONArray("intervals");
+            for (int i = 0; i< size; i++){
+                this.jsonTree = (JSONObject) intervalsJSON.get(i);
+                Interval interval = new Interval();
+
+                interval.acceptVisitor(this);
+                intervals.add(interval);
+                this.father = task;
+            }
         }
 
         task.setIntervals(intervals);
 
-        this.father = task;
+        System.out.println(task.getIntervals());
+
+
     }
 
     @Override
     public void visitProject(Project project) {
         project.setName(jsonTree.getString("name"));
+
+        System.out.println(project.getName());
 
         project.setTotalTime(jsonTree.getLong("totalTime"));
 
@@ -74,26 +91,36 @@ public class Load implements Visitor{
         if (jsonTree.get("finalTime") == JSONObject.NULL) project.setFinalTime(null);
         else project.setFinalTime(LocalDateTime.parse(jsonTree.getString("finalTime")));
 
-        if (this.father != null) project.setFather((Project) this.father);
+        if (this.father == null) project.setFather(null);
+        else project.setFather((Project) this.father);
 
         ArrayList<Activity> activities = new ArrayList<>();
 
-        for (int i = 0; i<jsonTree.getJSONArray("activities").length(); i++){
-            this.jsonTree = (JSONObject) jsonTree.getJSONArray("activities").get(i);
+        this.father = project;
+        int size = jsonTree.getJSONArray("activities").length();
 
-            if (Objects.equals(jsonTree.getString("type"), "project")){
-                Project p = new Project();
-                p.acceptVisitor(this);
-                activities.add(p);
-            }else{
-                Task t = new Task();
-                t.acceptVisitor(this);
-                activities.add(t);
+        if(size>0){
+            JSONArray activitiesJSON = jsonTree.getJSONArray("activities");
+
+            for (int i = 0; i<size; i++){
+                this.jsonTree = (JSONObject) activitiesJSON.get(i);
+
+                if (Objects.equals(jsonTree.getString("type"), "project")){
+                    Project p = new Project();
+                    p.acceptVisitor(this);
+                    activities.add(p);
+                }else if (Objects.equals(jsonTree.getString("type"), "task")){
+                    Task t = new Task();
+                    t.acceptVisitor(this);
+                    activities.add(t);
+                }
+                this.father = project;
             }
         }
+
         project.setActivities(activities);
 
-        this.father = project;
+
     }
 
     @Override
