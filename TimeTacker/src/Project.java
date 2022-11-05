@@ -1,5 +1,6 @@
 /*  
- *  
+ *  The component class from Composite. One Project can have other projects and tasks. It inherits the common methods and atributes
+ * from Activity.
  */ 
 
 import org.json.JSONObject;

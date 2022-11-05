@@ -1,6 +1,7 @@
 /*  
- *  
- */
+ * Implements Visitor. Allows us to print te whole tree of intervals, tasks and projects. We print the tree starting from the
+ * leafs and finishing at the root project.
+ * */
 
 public class Printer implements Visitor {
 

@@ -91,8 +91,8 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException {
 
-        testA();
-        // testB(); //Saver test implemented too.
-        // testLoad();
+        //testA();
+        //testB(); //Saver test implemented too.
+        testLoad();
     }
 }

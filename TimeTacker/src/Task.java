@@ -1,5 +1,6 @@
 /*
- * 
+ * The leaf class from Composite. One Task is compound of Intervals. It inherits the common methods and atributes
+ * from Activity.
  */
 
 import org.json.JSONObject;

@@ -41,8 +41,6 @@ public class Load implements Visitor {
 
         task.setName(jsonTree.getString("name"));
 
-        System.out.println(task.getName());
-
         task.setTotalTime(jsonTree.getLong("totalTime"));
 
         if (jsonTree.get("initialTime") == JSONObject.NULL)
@@ -77,16 +75,11 @@ public class Load implements Visitor {
         }
 
         task.setIntervals(intervals);
-
-        System.out.println(task.getIntervals());
-
     }
 
     @Override
     public void visitProject(Project project) {
         project.setName(jsonTree.getString("name"));
-
-        System.out.println(project.getName());
 
         project.setTotalTime(jsonTree.getLong("totalTime"));
 
