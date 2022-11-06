@@ -1,6 +1,6 @@
 public class Main {
 
-    public static void testB(){
+    public static void testB() {
 
         try {
             Project root = new Project("root", null);
@@ -52,16 +52,13 @@ public class Main {
             Save saver = new Save("data", root);
             System.out.println("\n---DONE---\n");
 
-
-
-
-        }catch (InterruptedException e) {
+        } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
 
-
     }
-    public static void testA(){
+
+    public static void testA() {
         Project root = new Project("root", null);
         Project software_design = new Project("software_design", root);
         Project software_testing = new Project("software_testing", root);
@@ -82,22 +79,20 @@ public class Main {
 
     }
 
-    public static void testLoad(){
+    public static void testLoad() {
         Load loader = new Load("data");
         Project root = loader.load();
 
         int size = root.getActivities().size();
 
-        root.getActivities().get(size -1).start();
+        root.getActivities().get(size - 1).start();
 
     }
 
+    public static void main(String[] args) throws InterruptedException {
 
-
-    public static void main(String[] args) throws InterruptedException{
-
-        testA();
-        //testB(); //en aquest test es prova el saver també.
-        //testLoad();
+        //testA();
+        //testB(); //Saver test implemented too.
+        testLoad();
     }
 }

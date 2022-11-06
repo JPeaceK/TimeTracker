@@ -1,3 +1,7 @@
+/* Activity class is designed to implement the Composite Pattern.
+ * Tasks and Projects are Activities.
+ */
+
 import org.json.JSONObject;
 
 import java.time.LocalDateTime;
@@ -9,9 +13,9 @@ public abstract class Activity {
 
     protected Clock clock;
     protected LocalDateTime finalTime;
-    protected Project father;
+    protected Project father; // Father will be always a Project instance. If project is Root, father must be NULL.
 
-    public Activity(String name, Project father){
+    public Activity(String name, Project father) {
         this.clock = Clock.getInstance();
         this.name = name;
         this.father = father;
@@ -20,12 +24,19 @@ public abstract class Activity {
     }
 
     public abstract Activity getFather();
+
     public abstract void setName(String name);
+
     public abstract void setInitialTime(LocalDateTime time);
+
     public abstract void setTotalTime(long totalTime);
+
     public abstract void setFinalTime(LocalDateTime time);
+
     public abstract void setFather(Project father);
+
     public abstract String getName();
+
     public abstract long getTotalTime();
 
     public abstract LocalDateTime getFinalTime();
