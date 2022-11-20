@@ -1,3 +1,4 @@
+package Milestone1;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -132,4 +133,11 @@ public class Task extends Activity {
   public void setIntervals(ArrayList<Interval> intervals) {
     this.intervals = intervals;
   }
+
+  @Override
+  public void addTag(String tag){
+    this.tags.add(tag.toLowerCase());
+  }
+
+  public ArrayList<String> getTags() {return this.tags;}
 }

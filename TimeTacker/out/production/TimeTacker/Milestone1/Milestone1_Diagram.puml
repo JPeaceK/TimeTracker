@@ -90,6 +90,24 @@ interface Visitor{
 
 }
 
+class Save{
+- textEditor: FileWriter
+- jsonTree: JSONObject
+- root: Project
+
++ visitTask(task:Task):void
++ visitProject(project:Project):void
++ visitInterval(interval:Interval):void
++ writeDocument():void
+}
+class Load{
+- jsonTree: JSONObject
+- father: Activity
++ visitTask(task:Task):void
++ visitProject(project:Project):void
++ visitInterval(interval:Interval):void
++ load():Project
+}
 Task --|> Activity
 Project --|> Activity
 Project o--> "*" Activity
@@ -100,4 +118,6 @@ Task -->"0..*" Interval
 Interval ..|> "1" Observer
 
 Printer ..|> Visitor
+Save ..|> Visitor
+Load ..|> Visitor
 @enduml

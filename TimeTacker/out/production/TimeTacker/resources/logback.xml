@@ -1,0 +1,35 @@
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder> <pattern>
+            %d{HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
+        </pattern> </encoder>
+    </appender>
+
+    <appender name="HTML" class="ch.qos.logback.core.FileAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.classic.html.HTMLLayout">
+                <pattern>%relative%thread%mdc%level%logger%msg</pattern>
+            </layout>
+        </encoder>
+        <file>log.html</file>
+    </appender>
+
+    <logger name="TimeTracker.MainFita1">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="HTML" />
+    </logger>
+    <logger name="TimeTracker.MainFita2">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="HTML" />
+    </logger>
+    <logger name="TimeTracker.Project">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="HTML" />
+    </logger>
+    <logger name="TimeTracker.Task">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="HTML" />
+    </logger>
+
+    <root level="info"></root>
+</configuration>

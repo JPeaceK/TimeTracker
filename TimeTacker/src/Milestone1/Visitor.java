@@ -1,3 +1,5 @@
+package Milestone1;
+
 /**
  * Visitor method implementation.
  * It is used to print the tree of projects and tasks.

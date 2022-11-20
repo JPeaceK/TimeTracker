@@ -1,7 +1,8 @@
-/* Activity class is designed to implement the Composite Pattern.
+package Milestone1;/* Activity class is designed to implement the Composite Pattern.
  * Tasks and Projects are Activities.
  */
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public abstract class Activity {
   protected String name;
@@ -14,12 +15,15 @@ public abstract class Activity {
   // Father will be always a Project instance. If project is Root, father must be NULL.
   protected Project father;
 
+  protected ArrayList<String> tags;
+
   public Activity(String name, Project father) {
     this.clock = Clock.getInstance();
     this.name = name;
     this.father = father;
     this.totalTime = 0;
     this.initialTime = null;
+    this.tags = new ArrayList<>();
   }
 
   public abstract Activity getFather();
@@ -45,6 +49,8 @@ public abstract class Activity {
   public abstract void acceptVisitor(Visitor visitor);
 
   public abstract void setFinalAndTotalTime(LocalDateTime time, long seconds);
+
+  public abstract void addTag(String tag);
 
   public abstract void start();
 
