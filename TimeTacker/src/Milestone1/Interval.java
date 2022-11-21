@@ -1,10 +1,14 @@
 package Milestone1;
 
+import org.slf4j.LoggerFactory;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Observable;
 import java.util.Observer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *  Interval class is responsible to get the information about total time of activities.
@@ -17,6 +21,8 @@ public class Interval implements Observer {
   private LocalDateTime finalTime;
   private long timeInterval;
   private Clock clock;
+
+  private Logger logger = LoggerFactory.getLogger(Interval.class);
 
   private Task father;
 
@@ -35,6 +41,11 @@ public class Interval implements Observer {
     this.timeInterval = 0;
     this.clock = Clock.getInstance();
     this.active = true;
+
+    logger.debug("Interval parameter constructor");
+    logger.debug("Interval of " + this.getFather().getName() +
+            " created at: " + this.getInitialTime());
+
   }
 
   /**
@@ -47,6 +58,8 @@ public class Interval implements Observer {
     this.timeInterval = 0;
     this.clock = null;
     this.active = false;
+
+    logger.debug("Interval default constructor");
   }
 
   public void setInitialTime(LocalDateTime name) {
@@ -107,6 +120,9 @@ public class Interval implements Observer {
     long timeIncremented = Duration.between(this.finalTime.toLocalTime(), time).getSeconds();
     this.father.setFinalAndTotalTime(this.finalTime, timeIncremented);
     this.finalTime = this.initialTime.plusSeconds(this.timeInterval);
+
+    logger.debug("Updating inteval time");
+    logger.debug("Interval total time: " + this.getTimeInterval());
   }
 
   @Override

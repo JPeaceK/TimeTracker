@@ -17,9 +17,14 @@ public class Clock extends Observable {
   private LocalDateTime actualTime;
   private static Clock clock;
 
+  private static Logger logger = LoggerFactory.getLogger(Clock.class);
+
   private Clock() {
     super();
     this.actualTime = LocalDateTime.now();
+
+    logger.trace("Clock constructor");
+    logger.trace("Actual time: " + this.getActualTime());
 
     // Thread that changes Clock time constantly.
     TimerTask timerTask = new TimerTask() {
@@ -45,8 +50,8 @@ public class Clock extends Observable {
   public static Clock getInstance() { // Singleton aplication
     if (clock == null) {
       clock = new Clock();
-      Logger logger = LoggerFactory.getLogger("TimeTracker.SingletonClock");
-      logger.info("Singleton Clock created " + clock.getActualTime());
+
+      logger.debug("First Clock instance created at: " + clock.getActualTime());
     }
     return clock;
   }

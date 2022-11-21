@@ -3,29 +3,40 @@ package Milestone1;/*
  * It inherits the common methods and atributes
  * from Activity.
  */
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 
 public class Project extends Activity {
 
   private ArrayList<Activity> activities;
+  private Logger logger = LoggerFactory.getLogger(Project.class);
 
   public Project(String name, Project father) {
     super(name, father);
     this.activities = new ArrayList<>();
 
+    logger.debug("Project parameter constructor");
+
     if (this.father != null) {
       this.father.addActivity(this);
+      logger.debug("Project " + this.name + " child of "
+              + this.getFather().getName());
+    } else {
+      logger.debug("Project " + this.name + " child of null");
     }
 
+    logger.debug("Activities: 0");
   }
 
   public Project() {
     super(null, null);
     this.activities = new ArrayList<>();
+
+    logger.debug("Project default constructor");
   }
 
   @Override
@@ -90,16 +101,21 @@ public class Project extends Activity {
       this.father.setFinalAndTotalTime(finalTime, seconds);
     }
 
+    logger.debug("Updating project time");
+    logger.debug("Project total time: " + this.getTotalTime());
   }
 
   @Override
   public void start() {
     if (this.initialTime == null) {
       this.initialTime = this.clock.getActualTime();
+      logger.debug("Project started for 1st time");
     }
     if (this.father != null) {
       this.father.start();
     }
+    logger.debug("Project " + this.getName() + " running");
+    logger.debug("Activities: " + this.getActivities().size());
   }
 
   @Override
@@ -118,6 +134,9 @@ public class Project extends Activity {
   @Override
   public void addTag(String tag){
     this.tags.add(tag.toLowerCase());
+
+    logger.debug("Tag: " + tag.toLowerCase() + " added");
+    logger.debug("Tags: " + this.getTags().size());
   }
 
   public ArrayList<String> getTags() {return this.tags;}

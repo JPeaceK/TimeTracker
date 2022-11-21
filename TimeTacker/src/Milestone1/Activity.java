@@ -1,6 +1,9 @@
 package Milestone1;/* Activity class is designed to implement the Composite Pattern.
  * Tasks and Projects are Activities.
  */
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -17,6 +20,8 @@ public abstract class Activity {
 
   protected ArrayList<String> tags;
 
+  private Logger logger = LoggerFactory.getLogger(Activity.class);
+
   public Activity(String name, Project father) {
     this.clock = Clock.getInstance();
     this.name = name;
@@ -24,6 +29,9 @@ public abstract class Activity {
     this.totalTime = 0;
     this.initialTime = null;
     this.tags = new ArrayList<>();
+
+    logger.debug("Activity " + this.getName() + " created");
+    logger.trace("Tags size: 0");
   }
 
   public abstract Activity getFather();

@@ -13,8 +13,8 @@
     <orderEntry type="library" name="json" level="project" />
     <orderEntry type="library" name="json1" level="project" />
     <orderEntry type="library" name="checkstyle" level="project" />
-    <orderEntry type="library" name="slf4j.ext" level="project" />
     <orderEntry type="library" name="ch.qos.logback.core" level="project" />
+    <orderEntry type="library" name="slf4j.ext" level="project" />
     <orderEntry type="library" name="ch.qos.logback.classic" level="project" />
   </component>
 </module>
