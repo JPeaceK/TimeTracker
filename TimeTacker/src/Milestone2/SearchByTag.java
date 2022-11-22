@@ -1,4 +1,4 @@
-package SearchByTag;
+package Milestone2;
 
 import Milestone1.Interval;
 import Milestone1.Project;
@@ -9,19 +9,26 @@ import Milestone1.Activity;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class SearchByTag implements Visitor{
-
   private ArrayList<Activity> activitiesWithTag;
   private String tag;
+
+  public Logger logger = LoggerFactory.getLogger(SearchByTag.class);
 
   public SearchByTag(String tag){
     this.activitiesWithTag = new ArrayList<>();
     this.tag = tag.toLowerCase();
+
+    logger.debug("SearchByTag parameter constructor");
   }
 
   public ArrayList<Activity> search(Activity activity){
     activity.acceptVisitor(this);
+    logger.debug("Searching tag: " + this.tag.toLowerCase());
     return getActivitiesWithTag();
   }
 
@@ -32,6 +39,8 @@ public class SearchByTag implements Visitor{
         this.activitiesWithTag.add(task);
       }
     }
+
+    logger.debug("Searching " + task.getName() + " tags");
   }
 
   @Override
@@ -47,6 +56,8 @@ public class SearchByTag implements Visitor{
         this.activitiesWithTag.add(project);
       }
     }
+
+    logger.debug("Searching " + project.getName() + " tags");
   }
 
   @Override

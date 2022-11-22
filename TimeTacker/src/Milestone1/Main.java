@@ -1,5 +1,5 @@
 package Milestone1;
-import SearchByTag.SearchByTag;
+import Milestone2.SearchByTag;
 
 public class Main {
 
@@ -23,38 +23,38 @@ public class Main {
       final Clock clock = Clock.getInstance();
 
       Thread.sleep(1500);
-      System.out.println("Transportation starts");
+      //System.out.println("Transportation starts");
       transportation.start();
       Thread.sleep(6000);
       transportation.stop();
-      System.out.println("Transportation stops");
+      //System.out.println("Transportation stops");
 
       Thread.sleep(2000);
 
-      System.out.println("First_list starts");
+      //System.out.println("First_list starts");
       firstList.start();
       Thread.sleep(6000);
-      System.out.println("Second_list starts");
+      //System.out.println("Second_list starts");
       secondList.start();
       Thread.sleep(4000);
 
-      System.out.println("First_list stops");
+      //System.out.println("First_list stops");
       firstList.stop();
       Thread.sleep(2000);
-      System.out.println("Second_list stops");
+      //System.out.println("Second_list stops");
       secondList.stop();
       Thread.sleep(2000);
 
-      System.out.println("Transportation start");
+      //System.out.println("Transportation start");
       transportation.start();
       Thread.sleep(4000);
-      System.out.println("Transportation stops");
+      //System.out.println("Transportation stops");
       transportation.stop();
 
       Thread.sleep(5000);
-      System.out.println("\nSaving json...\n");
+      //System.out.println("\nSaving json...\n");
       Save saver = new Save("data", root);
-      System.out.println("\n---DONE---\n");
+      //System.out.println("\n---DONE---\n");
 
     } catch (InterruptedException e) {
       throw new RuntimeException(e);
@@ -98,7 +98,7 @@ public class Main {
     firstMilestone.addTag("Java");
     firstMilestone.addTag("IntelliJ");
 
-    SearchByTag sbt = new SearchByTag("jose");
+    SearchByTag sbt = new SearchByTag("java");
     System.out.println(sbt.search(softwareDesign));
 
   }
@@ -106,7 +106,7 @@ public class Main {
   public static void main(String[] args) {
 
 
-    //testB(); //Saver test implemented too.
+    testB(); //Saver test implemented too.
     //testLoad();
     testTags();
   }

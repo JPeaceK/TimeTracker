@@ -17,7 +17,7 @@ public class Clock extends Observable {
   private LocalDateTime actualTime;
   private static Clock clock;
 
-  private static Logger logger = LoggerFactory.getLogger(Clock.class);
+  public static Logger logger = LoggerFactory.getLogger(Clock.class);
 
   private Clock() {
     super();
