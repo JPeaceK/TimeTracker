@@ -10,6 +10,8 @@ import java.util.Objects;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Load class is designed to be able to load a JSON file, previously saved.
@@ -18,6 +20,7 @@ import org.json.JSONTokener;
  */
 public class Load implements Visitor {
 
+  public Logger logger = LoggerFactory.getLogger(Load.class);
   private JSONObject jsonTree;
   private Activity father;
 
@@ -35,8 +38,12 @@ public class Load implements Visitor {
       JSONTokener json = new JSONTokener(string);
       this.jsonTree = new JSONObject(json);
     } catch (IOException e) {
+      logger.error("Could not load");
       throw new RuntimeException(e);
     }
+
+    logger.debug("Load parameter constructor");
+    logger.trace("Loading " + fileName + " JSON");
   }
 
   /**
@@ -48,11 +55,15 @@ public class Load implements Visitor {
   public Project load() {
     Project root = new Project();
     root.acceptVisitor(this);
+
+    logger.trace("Loading " + root.getName() + " tree");
     return root;
   }
 
   @Override
   public void visitTask(Task task) {
+
+    logger.trace("Loading task " + task.getName());
 
     task.setName(jsonTree.getString("name"));
 
@@ -91,10 +102,15 @@ public class Load implements Visitor {
     }
 
     task.setIntervals(intervals);
+
+
   }
 
   @Override
   public void visitProject(Project project) {
+
+    logger.trace("Loading " + project.getName());
+
     project.setName(jsonTree.getString("name"));
 
     project.setTotalTime(jsonTree.getLong("totalTime"));
@@ -147,6 +163,9 @@ public class Load implements Visitor {
 
   @Override
   public void visitInterval(Interval interval) {
+
+    logger.trace("Loading interval");
+
     interval.setTotalTime(jsonTree.getLong("totalTime"));
     if (jsonTree.get("initialTime") == JSONObject.NULL) {
       interval.setInitialTime(null);

@@ -23,16 +23,5 @@
         <appender-ref ref="STDOUT" />
         <appender-ref ref="HTML" />
     </logger>
-    <!--
-    <logger name="TimeTracker.Project">
-        <appender-ref ref="STDOUT" />
-        <appender-ref ref="HTML" />
-    </logger>
-    <logger name="TimeTracker.Task">
-        <appender-ref ref="STDOUT" />
-        <appender-ref ref="HTML" />
-    </logger>
-    -->
-
-    <!--<root level="info"></root>-->
+    <root level="trace"/>
 </configuration>

@@ -4,6 +4,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Save class is designed to save a JSON file with information that
@@ -12,6 +14,7 @@ import org.json.JSONObject;
  */
 public class Save implements Visitor {
 
+  public Logger logger = LoggerFactory.getLogger(Save.class);
   private FileWriter textEditor;
   private JSONObject jsonTree;
   private Project root;
@@ -28,13 +31,20 @@ public class Save implements Visitor {
       this.root = root;
       this.root.acceptVisitor(this);
     } catch (IOException e) {
+      logger.error("Could not save");
       throw new RuntimeException(e);
     }
+
+    logger.debug("Save parameter constructor");
+    logger.trace("Saving " + root + " at " + fileName);
   }
 
   // We want to accept ROOT to sabe the whole tree.
   @Override
   public void visitTask(Task task) {
+
+    logger.trace("Saving " + task.getName());
+
     JSONObject json = new JSONObject();
 
     json.put("type", "task");
@@ -66,6 +76,9 @@ public class Save implements Visitor {
 
   @Override
   public void visitProject(Project project) {
+
+    logger.trace("Saving " + project.getName());
+
     JSONObject json = new JSONObject();
 
     json.put("type", "project");
@@ -103,6 +116,9 @@ public class Save implements Visitor {
 
   @Override
   public void visitInterval(Interval interval) {
+
+    logger.trace("Saving interval");
+
     JSONObject json = new JSONObject();
     json.put("type", "interval");
     json.put("totalTime", interval.getTimeInterval());
@@ -132,5 +148,7 @@ public class Save implements Visitor {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
+
+    logger.debug("Writting JSON document");
   }
 }

@@ -28,8 +28,8 @@ public class Task extends Activity {
     this.father.addActivity(this);
 
     logger.debug("Task parameter constructor");
-    logger.debug("Task " + this.getName() + " child of " + this.getFather().getName());
-    logger.debug("Intervals: 0");
+    logger.trace("Task " + this.getName() + " child of " + this.getFather().getName());
+    logger.trace("Intervals: 0");
   }
 
   /**
@@ -193,7 +193,7 @@ public class Task extends Activity {
     this.tags.add(tag.toLowerCase());
 
     logger.debug("Tag: " + tag.toLowerCase() + " added");
-    logger.debug("Tags: " + this.getTags().size());
+    logger.trace("Tags: " + this.getTags().size());
     //PostCondition
     assert (getTags() != null) : "TAGS STORE ERROR";
   }

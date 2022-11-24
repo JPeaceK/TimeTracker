@@ -36,7 +36,7 @@ public class Project extends Activity {
       logger.debug("Project " + this.name + " child of null");
     }
 
-    logger.debug("Activities: 0");
+    logger.trace("Activities: 0");
   }
 
   /**
@@ -112,20 +112,20 @@ public class Project extends Activity {
     }
 
     logger.debug("Updating project time");
-    logger.debug("Project total time: " + this.getTotalTime());
+    logger.trace("Project total time: " + this.getTotalTime());
   }
 
   @Override
   public void start() {
     if (this.initialTime == null) {
       this.initialTime = this.clock.getActualTime();
-      logger.debug("Project started for 1st time");
+      logger.trace("Project started for 1st time");
     }
     if (this.father != null) {
       this.father.start();
     }
     logger.debug("Project " + this.getName() + " running");
-    logger.debug("Activities: " + this.getActivities().size());
+    logger.trace("Activities: " + this.getActivities().size());
   }
 
   @Override
@@ -144,8 +144,8 @@ public class Project extends Activity {
   @Override
   public void addTag(String tag) {
     this.tags.add(tag.toLowerCase());
-    logger.debug("Tag: " + tag.toLowerCase() + " added");
-    logger.debug("Tags: " + this.getTags().size());
+    logger.trace("Tag: " + tag.toLowerCase() + " added");
+    logger.trace("Tags: " + this.getTags().size());
   }
 
   public ArrayList<String> getTags() {

@@ -69,7 +69,6 @@ public class Main {
     int size = root.getActivities().size();
 
     root.getActivities().get(size - 1).start();
-
   }
 
   public static void testTags() {
@@ -105,8 +104,6 @@ public class Main {
   }
 
   public static void main(String[] args) {
-
-
     testB(); //Saver test implemented too.
     //testLoad();
     testTags();
