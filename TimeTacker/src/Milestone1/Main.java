@@ -2,6 +2,8 @@ package Milestone1;
 
 import Milestone2.SearchByTag;
 
+import java.util.ArrayList;
+
 /**
  * Main class that does the tests of the different functionalities that
  * Time Tracker application has to do.
@@ -113,13 +115,16 @@ public class Main {
     firstMilestone.addTag("IntelliJ");
 
     SearchByTag sbt = new SearchByTag("java");
-    System.out.println(sbt.search(softwareDesign));
+    ArrayList<Activity> activitiesWithTag = sbt.search(root);
 
+    for (Activity activity : activitiesWithTag) {
+      System.out.println(activity.getName());
+    }
   }
 
   public static void main(String[] args) {
     testB(); //Saver test implemented too.
     //testLoad();
-    //testTags();
+    testTags();
   }
 }
