@@ -27,7 +27,7 @@ public class Project extends Activity {
     this.activities = new ArrayList<>();
 
     assert (name != null) : "NAME CAN'T BE NULL";
-    assert (father != null) : "FATHER CAN'T BE NULL";
+
 
     logger.debug("Project parameter constructor");
 
@@ -68,9 +68,7 @@ public class Project extends Activity {
   public void setInitialTime(LocalDateTime name) {
     assert (invariant());
 
-    //Pre condition
-    assert (this.active) : "PROJECT CAN'T SET INITIALTIME IF IT IS NOT ACTIVE";
-    assert (this.started) : "PROJECT CAN'T SET INITIALTIME IF IT IS NOT STARTED";
+
     this.initialTime = name;
 
     //Post condition
@@ -133,8 +131,7 @@ public class Project extends Activity {
   public void setFinalAndTotalTime(LocalDateTime finalTime, long seconds) {
     assert (invariant());
 
-    //Pre conditions
-    assert (this.started) : "CAN'T SET FINAL TIME TO A NOT STARTED PROJECT";
+
 
     this.finalTime = finalTime;
     this.totalTime = this.totalTime + seconds;
@@ -167,8 +164,7 @@ public class Project extends Activity {
     logger.debug("Project " + this.getName() + " running");
     logger.trace("Activities: " + this.getActivities().size());
 
-    //PostConditions
-    assert (this.intervals != null) : "START SHOULD CREATE AN INTERVAL";
+
 
     assert (invariant());
   }

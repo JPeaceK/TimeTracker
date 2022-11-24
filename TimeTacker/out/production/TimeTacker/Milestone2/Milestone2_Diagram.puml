@@ -1,0 +1,171 @@
+@startuml
+class Milestone1.Main {
++ {static} void testB()
++ {static} void testLoad()
++ {static} void testTags()
++ {static} void main(String[])
+}
+interface Milestone1.Visitor {
+~ void visitTask(Task)
+~ void visitProject(Project)
+~ void visitInterval(Interval)
+}
+class Milestone1.Task {
+- ArrayList<Interval> intervals
+- boolean active
+- boolean started
+- Logger logger
++ Activity getFather()
++ void setInitialTime(LocalDateTime)
++ void setTotalTime(long)
++ void setFinalTime(LocalDateTime)
++ void setFather(Project)
++ void setName(String)
++ String getName()
++ LocalDateTime getFinalTime()
++ long getTotalTime()
++ LocalDateTime getInitialTime()
++ void setFinalAndTotalTime(LocalDateTime,long)
++ void start()
++ void stop()
++ void acceptVisitor(Visitor)
++ boolean getActive()
++ ArrayList<Interval> getIntervals()
++ void setActive(boolean)
++ void setIntervals(ArrayList<Interval>)
++ void addTag(String)
++ ArrayList<String> getTags()
+- boolean invariant()
+}
+class Milestone1.Interval {
+- LocalDateTime initialTime
+- LocalDateTime finalTime
+- long timeInterval
+- Clock clock
+- Logger logger
+- Task father
+- boolean active
++ void setInitialTime(LocalDateTime)
++ void setActive(boolean)
++ void setTotalTime(long)
++ void setFinalTime(LocalDateTime)
++ void setFinalTime()
++ void setFather(Task)
++ LocalDateTime getInitialTime()
++ Task getFather()
++ LocalDateTime getFinalTime()
++ long getTimeInterval()
++ boolean getActive()
++ void acceptVisitor(Visitor)
++ void updateTime()
++ void update(Observable,Object)
+}
+class Milestone1.Printer {
++ Logger logger
++ void visitTask(Task)
++ void visitProject(Project)
++ void visitInterval(Interval)
+}
+class Milestone1.Project {
+- ArrayList<Activity> activities
+- Logger logger
++ Activity getFather()
++ void setActivities(ArrayList<Activity>)
++ void setInitialTime(LocalDateTime)
++ void setTotalTime(long)
++ void setFinalTime(LocalDateTime)
++ void setFather(Project)
++ void setName(String)
++ String getName()
++ long getTotalTime()
++ LocalDateTime getFinalTime()
++ LocalDateTime getInitialTime()
++ void setFinalAndTotalTime(LocalDateTime,long)
++ void start()
++ void acceptVisitor(Visitor)
++ ArrayList<Activity> getActivities()
++ void addActivity(Activity)
++ void addTag(String)
++ ArrayList<String> getTags()
+- boolean invariant()
+}
+class Milestone1.Clock {
+- LocalDateTime actualTime
+- {static} Clock clock
++ {static} Logger logger
++ {static} Clock getInstance()
++ LocalDateTime getActualTime()
+}
+abstract class Milestone1.Activity {
+# String name
+# LocalDateTime initialTime
+# long totalTime
+# Clock clock
+# LocalDateTime finalTime
+# Project father
+# ArrayList<String> tags
+- Logger logger
++ {abstract}Activity getFather()
++ {abstract}void setName(String)
++ {abstract}void setInitialTime(LocalDateTime)
++ {abstract}void setTotalTime(long)
++ {abstract}void setFinalTime(LocalDateTime)
++ {abstract}void setFather(Project)
++ {abstract}String getName()
++ {abstract}long getTotalTime()
++ {abstract}LocalDateTime getFinalTime()
++ {abstract}LocalDateTime getInitialTime()
++ {abstract}void acceptVisitor(Visitor)
++ {abstract}void setFinalAndTotalTime(LocalDateTime,long)
++ {abstract}void addTag(String)
++ {abstract}void start()
+}
+class Milestone1.Save {
++ Logger logger
+- FileWriter textEditor
+- JSONObject jsonTree
+- Project root
++ void visitTask(Task)
++ void visitProject(Project)
++ void visitInterval(Interval)
++ void writeDocument()
+}
+class Milestone1.Load {
++ Logger logger
+- JSONObject jsonTree
+- Activity father
++ Project load()
++ void visitTask(Task)
++ void visitProject(Project)
++ void visitInterval(Interval)
+}
+
+class Milestone2.SearchByTag {
+- ArrayList<Activity> activitiesWithTag
+- String tag
++ Logger logger
++ <<Create>> SearchByTag(String)
++ ArrayList<Activity> search(Activity)
++ void visitTask(Task)
++ void visitProject(Project)
++ void visitInterval(Interval)
++ ArrayList<Activity> getActivitiesWithTag()
+}
+
+
+org.json.JSONArray <|.. Milestone1.Load
+org.json.JSONObject <|.. Milestone1.Load
+org.json.JSONTokener <|.. Milestone1.Load
+org.json.JSONArray <|.. Milestone1.Save
+org.json.JSONObject <|.. Milestone1.Save
+org.slf4j.Logger <|.. Milestone1
+org.slf4j.Logger <|.. Milestone2
+Milestone1.Visitor <|.. Milestone2.SearchByTag
+Milestone1.Activity <|-- Milestone1.Task
+java.util.Observer <|.. Milestone1.Interval
+Milestone1.Visitor <|.. Milestone1.Printer
+Milestone1.Activity <|-- Milestone1.Project
+java.util.Observable <|-- Milestone1.Clock
+Milestone1.Visitor <|.. Milestone1.Save
+Milestone1.Visitor <|.. Milestone1.Load
+@enduml
