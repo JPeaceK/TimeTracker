@@ -1,20 +1,27 @@
-package Milestone1;/*
- *  The component class from Composite. One Project can have other projects and tasks.
- * It inherits the common methods and atributes
- * from Activity.
- */
+package Milestone1;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-
+/**
+ * The component class from Composite. One Project can have other projects and tasks.
+ * It inherits the common methods and atributes
+ * from Activity.
+ */
 public class Project extends Activity {
 
   private ArrayList<Activity> activities;
   private Logger logger = LoggerFactory.getLogger(Project.class);
 
+  /**
+   * Project constructor.
+   *
+   * @param name - String of the name of the project.
+   * @param father - Project object of the father.
+   */
   public Project(String name, Project father) {
     super(name, father);
     this.activities = new ArrayList<>();
@@ -32,6 +39,9 @@ public class Project extends Activity {
     logger.debug("Activities: 0");
   }
 
+  /**
+   * Default Project constructor.
+   */
   public Project() {
     super(null, null);
     this.activities = new ArrayList<>();
@@ -132,17 +142,18 @@ public class Project extends Activity {
   }
 
   @Override
-  public void addTag(String tag){
+  public void addTag(String tag) {
     this.tags.add(tag.toLowerCase());
-
     logger.debug("Tag: " + tag.toLowerCase() + " added");
     logger.debug("Tags: " + this.getTags().size());
   }
 
-  public ArrayList<String> getTags() {return this.tags;}
+  public ArrayList<String> getTags() {
+    return this.tags;
+  }
 
   private boolean invariant() {
-      //TODO
-      return true;
+    //TODO
+    return true;
   }
 }

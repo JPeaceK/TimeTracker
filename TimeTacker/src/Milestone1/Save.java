@@ -1,19 +1,27 @@
-package Milestone1;/*  Save class is designed to save a JSON file with information that
-we will load when application restarts.
- *  It will save all atributes of Activities and Intervals.
- */
+package Milestone1;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-
+/**
+ * Save class is designed to save a JSON file with information that
+ * we will load when application restarts.
+ * It will save all atributes of Activities and Intervals.
+ */
 public class Save implements Visitor {
 
   private FileWriter textEditor;
   private JSONObject jsonTree;
   private Project root;
 
+  /**
+   * Save Constructor.
+   *
+   * @param fileName - String of the name of the JSON.
+   * @param root - Project object of the root project.
+   */
   public Save(String fileName, Project root) {
     try {
       this.textEditor = new FileWriter(fileName);
@@ -114,6 +122,9 @@ public class Save implements Visitor {
     this.jsonTree = json;
   }
 
+  /**
+   * Function that writes the tree of Activities.
+   */
   public void writeDocument() {
     try {
       this.textEditor.write(this.jsonTree.toString());

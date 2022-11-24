@@ -1,7 +1,6 @@
-package Milestone1;/*  Load class is designed to be able to load a JSON file, previously saved.
- *  This gives to the application the capacity to restart and keep the information before it closes.
- *  We will be able to load all atributes of Activities and Intervals.
- */
+package Milestone1;
+
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,11 +11,23 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+/**
+ * Load class is designed to be able to load a JSON file, previously saved.
+ *  This gives to the application the capacity to restart and keep the information before it closes.
+ *  We will be able to load all atributes of Activities and Intervals.
+ */
 public class Load implements Visitor {
 
   private JSONObject jsonTree;
   private Activity father;
 
+  /**
+   * Constructor of Load with a parameter fileName.
+   * It reads the JSON file and creates the Load Object with the JSON values.
+   *
+   * @param fileName - String of the fileName.
+   *
+   */
   public Load(String fileName) {
     this.father = null;
     try {
@@ -28,6 +39,12 @@ public class Load implements Visitor {
     }
   }
 
+  /**
+   * Default Load constructor.
+   *
+   * @return  the Project object created.
+   *
+   */
   public Project load() {
     Project root = new Project();
     root.acceptVisitor(this);

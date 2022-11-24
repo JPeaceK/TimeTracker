@@ -1,17 +1,20 @@
-package Milestone1;/*  Clock class is part of the implementation of Singleton creational Pattern.
- *  The unic instance of this class will be the Timer of the whole app.
- *  The implementation of singleton is Lazy type.
- *  It's part of the Observer pattern, being the Observable object that notify tasks when
- * it receives a tick.
- */
+package Milestone1;
+
 
 import java.time.LocalDateTime;
 import java.util.Observable;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+/**
+ *  Clock class is part of the implementation of Singleton creation Pattern.
+ *  The unique instance of this class will be the Timer of the whole app.
+ *  The implementation of singleton is Lazy type.
+ *  It's part of the Observer pattern, being the Observable object that notify tasks when
+ *  it receives a tick.
+ */
 
 public class Clock extends Observable {
   private LocalDateTime actualTime;
@@ -46,7 +49,12 @@ public class Clock extends Observable {
      */
   }
 
-  //Returns the clocks instance in order to follow the Singleton pattern rules
+  /**
+   * Returns the clocks instance in order to follow the Singleton pattern rules.
+   *
+   * @return  - The Clock instance.
+   *
+   */
   public static Clock getInstance() { // Singleton aplication
     if (clock == null) {
       clock = new Clock();

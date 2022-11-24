@@ -1,4 +1,5 @@
 package Milestone1;
+
 import Milestone2.SearchByTag;
 
 public class Main {
@@ -71,7 +72,7 @@ public class Main {
 
   }
 
-  public static void testTags(){
+  public static void testTags() {
     Project root = new Project("root", null);
     Project softwareDesign = new Project("software_design", root);
     Project softwareTesting = new Project("software_testing", root);

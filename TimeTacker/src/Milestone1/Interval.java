@@ -1,7 +1,5 @@
 package Milestone1;
 
-import org.slf4j.LoggerFactory;
-
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -43,8 +41,8 @@ public class Interval implements Observer {
     this.active = true;
 
     logger.debug("Interval parameter constructor");
-    logger.debug("Interval of " + this.getFather().getName() +
-            " created at: " + this.getInitialTime());
+    logger.debug("Interval of " + this.getFather().getName()
+            + " created at: " + this.getInitialTime());
 
   }
 

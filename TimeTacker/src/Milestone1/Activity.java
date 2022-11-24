@@ -1,12 +1,14 @@
-package Milestone1;/* Activity class is designed to implement the Composite Pattern.
- * Tasks and Projects are Activities.
- */
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+package Milestone1;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+/**
+ *  Activity class is designed to implement the Composite Pattern.
+ * Tasks and Projects are Activities.
+ */
 public abstract class Activity {
   protected String name;
   protected LocalDateTime initialTime;
@@ -22,6 +24,12 @@ public abstract class Activity {
 
   private Logger logger = LoggerFactory.getLogger(Activity.class);
 
+  /**
+   * Activity Constructor.
+   *
+   * @param name - String variable of the name of the Activity.
+   * @param father - Project object of the father of the Activity to be created.
+   */
   public Activity(String name, Project father) {
     this.clock = Clock.getInstance();
     this.name = name;
