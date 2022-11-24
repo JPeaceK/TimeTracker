@@ -131,7 +131,6 @@ public class Task extends Activity {
     assert(invariant());
 
     //Pre conditions
-
     assert (this.started) : "CAN'T SET FINAL TIME TO A NOT STARTED TASK";
 
     this.finalTime = finalTime;
@@ -170,7 +169,6 @@ public class Task extends Activity {
     //PostConditions
     assert (this.intervals != null) : "START SHOULD CREATE AN INTERVAL";
 
- 
     assert (invariant());
   }
 
@@ -241,7 +239,6 @@ public class Task extends Activity {
   private boolean invariant() {
     assert (father != null) : "TASK MUST HAVE A FATHER";
     assert (name != null) : "TASK MUST HAVE A NAME";
-    //assert (initialTime != null) : "TASK MUST HAVE AN INITIAL TIME";
     assert (tags != null) : "TASK MUST HAVE A TAG";
 
     return true;
