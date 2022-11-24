@@ -51,6 +51,10 @@ public class Task extends Activity {
 
   @Override
   public void setInitialTime(LocalDateTime name) {
+    assert invariant();
+    //PreCondition
+    assert(this.active);
+    assert(this.started);
     this.initialTime = name;
   }
 
@@ -96,34 +100,58 @@ public class Task extends Activity {
 
   @Override
   public void setFinalAndTotalTime(LocalDateTime finalTime, long seconds) {
+    assert(invariant());
+
+    //PreConditions
+    assert(!this.active);
+    assert(this.started);
+
     this.finalTime = finalTime;
     this.totalTime = this.totalTime + seconds;
     this.father.setFinalAndTotalTime(finalTime, seconds);
 
+    //PostConditions
+    assert(getTotalTime() > 0.0);
+    assert(this.intervals!=null);
     logger.debug("Updating task time");
     logger.debug("Task total time: " + this.getTotalTime());
   }
 
   @Override
   public void start() {
+    assert(invariant());
+    this.active = true;
+    this.started = true;
+
     if (this.initialTime == null) {
       this.initialTime = this.clock.getActualTime();
       logger.debug("Task started for 1st time");
     }
-    this.active = true;
-    this.started = true;
+
     this.father.start();
     intervals.add(new Interval(this));
     clock.addObserver(intervals.get(intervals.size() - 1));
 
     logger.debug("Task " + this.getName() + " running");
     logger.debug("Intervals: " + this.getIntervals().size());
+
+    //PostConditions
+    assert(this.intervals != null);
+    assert(getInitialTime() != null);
+    assert(getFinalTime() == null);
   }
 
   /**
    * Function that stops the task counter.
    */
   public void stop() {
+    assert(invariant());
+    //PreConditions
+    assert(this.active);
+    assert(this.started);
+    assert(this.intervals != null);
+    assert(getFinalTime() == null);
+
     this.active = false;
     this.intervals.get(this.intervals.size() - 1).setActive(false);
     this.intervals.get(this.intervals.size() - 1).setFinalTime();
@@ -131,6 +159,11 @@ public class Task extends Activity {
 
     logger.debug("Task " + this.getName() + " stopped");
     logger.debug("Intervals: " + this.getIntervals().size());
+
+    //PostConditions
+    assert(!this.active);
+    assert(getFinalTime() != null);
+    assert(getTotalTime() > 0.0);
   }
 
   @Override
@@ -156,11 +189,19 @@ public class Task extends Activity {
 
   @Override
   public void addTag(String tag){
+    assert(invariant());
     this.tags.add(tag.toLowerCase());
 
     logger.debug("Tag: " + tag.toLowerCase() + " added");
     logger.debug("Tags: " + this.getTags().size());
+    //PostCondition
+    assert(getTags() != null);
   }
 
   public ArrayList<String> getTags() {return this.tags;}
+
+  private boolean invariant() {
+    Activity father = getFather(); //All tasks have a parent.
+    return (father != null);
+  }
 }

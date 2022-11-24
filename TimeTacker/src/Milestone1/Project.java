@@ -141,4 +141,8 @@ public class Project extends Activity {
 
   public ArrayList<String> getTags() {return this.tags;}
 
+  private boolean invariant() {
+      //TODO
+      return true;
+  }
 }
