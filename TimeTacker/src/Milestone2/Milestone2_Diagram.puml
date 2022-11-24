@@ -153,7 +153,11 @@ class Milestone2.SearchByTag {
 }
 
 
-
+org.json.JSONArray <|.. Milestone1.Load
+org.json.JSONObject <|.. Milestone1.Load
+org.json.JSONTokener <|.. Milestone1.Load
+org.json.JSONArray <|.. Milestone1.Save
+org.json.JSONObject <|.. Milestone1.Save
 org.slf4j.Logger <|.. Milestone1
 org.slf4j.Logger <|.. Milestone2
 Milestone1.Visitor <|.. Milestone2.SearchByTag
