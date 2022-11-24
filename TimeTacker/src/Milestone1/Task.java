@@ -21,11 +21,12 @@ public class Task extends Activity {
    * Constructor with two parameters: String name and Project father.
    */
   public Task(String name, Project father) {
+    super(name, father);
     //Pre conditions
     assert(name != null) : "NAME CAN'T BE NULL";
     assert(father != null) : "FATHER CAN'T BE NULL";
 
-    super(name, father);
+
     this.active = false;
     this.started = false;
     this.intervals = new ArrayList<>();
@@ -130,7 +131,7 @@ public class Task extends Activity {
     assert(invariant());
 
     //Pre conditions
-    assert (!this.active) : "CAN'T SET FINAL TIME TO AN ACTIVE TASK";
+
     assert (this.started) : "CAN'T SET FINAL TIME TO A NOT STARTED TASK";
 
     this.finalTime = finalTime;
@@ -139,7 +140,7 @@ public class Task extends Activity {
 
     //PostConditions
     assert (this.finalTime == finalTime) : "SET_FINAL_AND_TOTAL_TIME DIDN'T WORK AS EXPECTED WITH FINALTIME";
-    assert (this.totalTime == this.totalTime + seconds) : "SET_FINAL_AND_TOTAL_TIME DIDN'T WORK AS EXPECTED WITH TOTALTIME"
+    assert (this.totalTime != 0) : "SET_FINAL_AND_TOTAL_TIME DIDN'T WORK AS EXPECTED WITH TOTALTIME";
 
     logger.debug("Updating task time");
     logger.debug("Task total time: " + this.getTotalTime());
@@ -168,7 +169,7 @@ public class Task extends Activity {
 
     //PostConditions
     assert (this.intervals != null) : "START SHOULD CREATE AN INTERVAL";
-    assert (this.finalTime == null) : "START DON'T SET ANY FINAL TIME";
+
  
     assert (invariant());
   }
@@ -182,7 +183,7 @@ public class Task extends Activity {
     //PreConditions
     assert (this.active) : "CAN'T STOP A NOT ACTIVE TASK";
     assert (this.started) : "CAN'T STOP A NOT STARTED TASK";
-    assert (this.finalTime == null) : "FINAL TIME ALREADY SETTED";
+
 
     this.active = false;
     this.intervals.get(this.intervals.size() - 1).setActive(false);
@@ -192,10 +193,10 @@ public class Task extends Activity {
     logger.debug("Task " + this.getName() + " stopped");
     logger.debug("Intervals: " + this.getIntervals().size());
 
-    //PreConditions
-    assert (this.active) : "CAN'T STOP A NOT ACTIVE TASK";
+    //PostConditions
+    assert (!this.active) : "STOP DIND'T WORK AS EXPECTED";
     assert (this.started) : "CAN'T STOP A NOT STARTED TASK";
-    assert (this.finalTime == null) : "FINAL TIME ALREADY SETTED";
+    assert (this.finalTime != null) : "FINAL TIME ALREADY SETTED";
   }
 
   @Override
@@ -223,7 +224,7 @@ public class Task extends Activity {
 
   @Override
   public void addTag(String tag) {
-    assert (invariant()) : "TASK INVARIANT ERROR";
+    assert (invariant());
     this.tags.add(tag.toLowerCase());
 
     logger.debug("Tag: " + tag.toLowerCase() + " added");
@@ -233,14 +234,14 @@ public class Task extends Activity {
   }
 
   public ArrayList<String> getTags() {
+    assert(invariant());
     return this.tags;
-        assert(invariant());
   }
 
   private boolean invariant() {
     assert (father != null) : "TASK MUST HAVE A FATHER";
     assert (name != null) : "TASK MUST HAVE A NAME";
-    assert (initialTime != null) : "TASK MUST HAVE AN INITIAL TIME";
+    //assert (initialTime != null) : "TASK MUST HAVE AN INITIAL TIME";
     assert (tags != null) : "TASK MUST HAVE A TAG";
 
     return true;

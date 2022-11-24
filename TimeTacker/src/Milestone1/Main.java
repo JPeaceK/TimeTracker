@@ -104,7 +104,7 @@ public class Main {
   }
 
   public static void main(String[] args) {
-    testB(); //Saver test implemented too.
+    //testB(); //Saver test implemented too.
     //testLoad();
     testTags();
   }
