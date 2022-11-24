@@ -2,8 +2,15 @@ package Milestone1;
 
 import Milestone2.SearchByTag;
 
+/**
+ * Main class that does the tests of the different functionalities that
+ * Time Tracker application has to do.
+ */
 public class Main {
 
+  /**
+   * Milestone 1: Test B.
+   */
   public static void testB() {
 
     try {
@@ -62,6 +69,10 @@ public class Main {
     }
 
   }
+
+  /**
+   * Function made to test if the Load JSON documents works as expected.
+   */
   public static void testLoad() {
     Load loader = new Load("data");
     Project root = loader.load();
@@ -71,6 +82,9 @@ public class Main {
     root.getActivities().get(size - 1).start();
   }
 
+  /**
+   * Function that test that the SearchByTag functionality works as expected.
+   */
   public static void testTags() {
     Project root = new Project("root", null);
     Project softwareDesign = new Project("software_design", root);

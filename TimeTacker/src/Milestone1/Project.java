@@ -26,8 +26,8 @@ public class Project extends Activity {
     super(name, father);
     this.activities = new ArrayList<>();
 
-    assert(name != null) : "NAME CAN'T BE NULL";
-    assert(father != null) : "FATHER CAN'T BE NULL";
+    assert (name != null) : "NAME CAN'T BE NULL";
+    assert (father != null) : "FATHER CAN'T BE NULL";
 
     logger.debug("Project parameter constructor");
 
@@ -40,7 +40,7 @@ public class Project extends Activity {
     }
 
     logger.trace("Activities: 0");
-    assert(invariant());
+    assert (invariant());
   }
 
   /**
@@ -51,12 +51,12 @@ public class Project extends Activity {
     this.activities = new ArrayList<>();
 
     logger.debug("Project default constructor");
-    assert(invariant());
+    assert (invariant());
   }
 
   @Override
   public Activity getFather() {
-    assert(invariant());
+    assert (invariant());
     return this.father;
   }
 
@@ -74,14 +74,14 @@ public class Project extends Activity {
     this.initialTime = name;
 
     //Post condition
-    assert(initialTime == name);
+    assert (initialTime == name);
   }
 
   @Override
   public void setTotalTime(long totalTime) {
     this.totalTime = totalTime;
     //Post condition
-    assert(this.totalTime == totalTime) : "SET_TOTAL_TIME MUST SET A VALID TIME";
+    assert (this.totalTime == totalTime) : "SET_TOTAL_TIME MUST SET A VALID TIME";
   }
 
   @Override
@@ -89,49 +89,49 @@ public class Project extends Activity {
     this.finalTime = time;
 
     //Post condition
-    assert(this.finalTime == time): "SET_FINAL_TIME MUST SET A VALID TIME";
+    assert (this.finalTime == time) : "SET_FINAL_TIME MUST SET A VALID TIME";
   }
 
   @Override
   public void setFather(Project father) {
     this.father = father;
-    assert(this.father == father) : "SET_FATHER DIDN'T WORK AS EXPECTED";
+    assert (this.father == father) : "SET_FATHER DIDN'T WORK AS EXPECTED";
   }
 
   @Override
   public void setName(String name) {
     this.name = name;
 
-    assert(this.name == name) : "SET_NAME DIDN'T WORK AS EXPECTED";
+    assert (this.name == name) : "SET_NAME DIDN'T WORK AS EXPECTED";
   }
 
   @Override
   public String getName() {
-    assert(invariant());
+    assert (invariant());
     return this.name;
   }
 
   @Override
   public long getTotalTime() {
-    assert(invariant());
+    assert (invariant());
     return this.totalTime;
   }
 
   @Override
   public LocalDateTime getFinalTime() {
-    assert(invariant());
+    assert (invariant());
     return this.finalTime;
   }
 
   @Override
   public LocalDateTime getInitialTime() {
-    assert(invariant());
+    assert (invariant());
     return this.initialTime;
   }
 
   @Override
   public void setFinalAndTotalTime(LocalDateTime finalTime, long seconds) {
-    assert(invariant());
+    assert (invariant());
 
     //Pre conditions
     assert (this.started) : "CAN'T SET FINAL TIME TO A NOT STARTED PROJECT";
@@ -143,8 +143,10 @@ public class Project extends Activity {
     }
 
     //PostConditions
-    assert (this.finalTime == finalTime) : "SET_FINAL_AND_TOTAL_TIME DIDN'T WORK AS EXPECTED WITH FINALTIME";
-    assert (this.totalTime != 0) : "SET_FINAL_AND_TOTAL_TIME DIDN'T WORK AS EXPECTED WITH TOTALTIME";
+    assert (this.finalTime == finalTime) :
+            "SET_FINAL_AND_TOTAL_TIME DIDN'T WORK AS EXPECTED WITH FINALTIME";
+    assert (this.totalTime != 0) :
+            "SET_FINAL_AND_TOTAL_TIME DIDN'T WORK AS EXPECTED WITH TOTALTIME";
 
     logger.debug("Updating project time");
     logger.trace("Project total time: " + this.getTotalTime());
@@ -180,6 +182,12 @@ public class Project extends Activity {
     return activities;
   }
 
+  /**
+   * Function that adds and activity to the project ArrayList of activities.
+   *
+   * @param activity - The Activity that is wanted to be added to the project.
+   *
+   */
   public void addActivity(Activity activity) {
     assert (invariant());
     this.getActivities().add(activity);
@@ -197,7 +205,7 @@ public class Project extends Activity {
   }
 
   public ArrayList<String> getTags() {
-    assert(invariant());
+    assert (invariant());
     return this.tags;
   }
 

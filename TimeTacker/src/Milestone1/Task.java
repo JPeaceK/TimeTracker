@@ -23,8 +23,8 @@ public class Task extends Activity {
   public Task(String name, Project father) {
     super(name, father);
     //Pre conditions
-    assert(name != null) : "NAME CAN'T BE NULL";
-    assert(father != null) : "FATHER CAN'T BE NULL";
+    assert (name != null) : "NAME CAN'T BE NULL";
+    assert (father != null) : "FATHER CAN'T BE NULL";
 
 
     this.active = false;
@@ -36,7 +36,7 @@ public class Task extends Activity {
     logger.trace("Task " + this.getName() + " child of " + this.getFather().getName());
     logger.trace("Intervals: 0");
 
-    assert(invariant());
+    assert (invariant());
   }
 
   /**
@@ -50,12 +50,12 @@ public class Task extends Activity {
 
     logger.debug("Task default constructor");
 
-    assert(invariant());
+    assert (invariant());
   }
 
   @Override
   public Activity getFather() {
-    assert(invariant());
+    assert (invariant());
     return this.father;
   }
 
@@ -69,7 +69,7 @@ public class Task extends Activity {
     this.initialTime = name;
 
     //Post condition
-    assert(initialTime == name);
+    assert (initialTime == name);
   }
 
   @Override
@@ -77,7 +77,7 @@ public class Task extends Activity {
     this.totalTime = totalTime;
 
     //Post condition
-    assert(this.totalTime == totalTime) : "SET_TOTAL_TIME MUST SET A VALID TIME";
+    assert (this.totalTime == totalTime) : "SET_TOTAL_TIME MUST SET A VALID TIME";
   }
 
   @Override
@@ -85,50 +85,50 @@ public class Task extends Activity {
     this.finalTime = time;
 
     //Post condition
-    assert(this.finalTime == time): "SET_FINAL_TIME MUST SET A VALID TIME";
+    assert (this.finalTime == time) : "SET_FINAL_TIME MUST SET A VALID TIME";
   }
 
   @Override
   public void setFather(Project father) {
     this.father = father;
   
-    assert(this.father == father) : "SET_FATHER DIDN'T WORK AS EXPECTED";
+    assert (this.father == father) : "SET_FATHER DIDN'T WORK AS EXPECTED";
   }
 
   @Override
   public void setName(String name) {
     this.name = name;
 
-    assert(this.name == name) : "SET_NAME DIDN'T WORK AS EXPECTED";
+    assert (this.name == name) : "SET_NAME DIDN'T WORK AS EXPECTED";
   }
 
   @Override
   public String getName() {
-    assert(invariant());
+    assert (invariant());
     return this.name;
   }
 
   @Override
   public LocalDateTime getFinalTime() {
-    assert(invariant());
+    assert (invariant());
     return this.finalTime;
   }
 
   @Override
   public long getTotalTime() {
-    assert(invariant());
+    assert (invariant());
     return this.totalTime;
   }
 
   @Override
   public LocalDateTime getInitialTime() {
-    assert(invariant());
+    assert (invariant());
     return this.initialTime;
   }
 
   @Override
   public void setFinalAndTotalTime(LocalDateTime finalTime, long seconds) {
-    assert(invariant());
+    assert (invariant());
 
     //Pre conditions
     assert (this.started) : "CAN'T SET FINAL TIME TO A NOT STARTED TASK";
@@ -138,8 +138,10 @@ public class Task extends Activity {
     this.father.setFinalAndTotalTime(finalTime, seconds);
 
     //PostConditions
-    assert (this.finalTime == finalTime) : "SET_FINAL_AND_TOTAL_TIME DIDN'T WORK AS EXPECTED WITH FINALTIME";
-    assert (this.totalTime != 0) : "SET_FINAL_AND_TOTAL_TIME DIDN'T WORK AS EXPECTED WITH TOTALTIME";
+    assert (this.finalTime == finalTime) :
+            "SET_FINAL_AND_TOTAL_TIME DIDN'T WORK AS EXPECTED WITH FINALTIME";
+    assert (this.totalTime != 0) :
+            "SET_FINAL_AND_TOTAL_TIME DIDN'T WORK AS EXPECTED WITH TOTALTIME";
 
     logger.debug("Updating task time");
     logger.debug("Task total time: " + this.getTotalTime());
@@ -212,12 +214,12 @@ public class Task extends Activity {
 
   public void setActive(boolean active) {
     this.active = active;
-        assert(this.active == active) : "SET_ACTIVE DIDN'T WORK AS EXPECTED";
+        assert (this.active == active) : "SET_ACTIVE DIDN'T WORK AS EXPECTED";
   }
 
   public void setIntervals(ArrayList<Interval> intervals) {
     this.intervals = intervals;
-        assert(this.intervals == intervals) : "SET_INTERVALS DIDN'T WORK AS EXPECTED";
+        assert (this.intervals == intervals) : "SET_INTERVALS DIDN'T WORK AS EXPECTED";
   }
 
   @Override
@@ -232,7 +234,7 @@ public class Task extends Activity {
   }
 
   public ArrayList<String> getTags() {
-    assert(invariant());
+    assert (invariant());
     return this.tags;
   }
 
