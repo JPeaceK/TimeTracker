@@ -43,6 +43,8 @@ public class Interval implements Observer {
     logger.debug("Interval parameter constructor");
     logger.trace("Interval of " + this.getFather().getName()
             + " created at: " + this.getInitialTime());
+    logger.info("Interval of " + this.getFather().getName()
+            + " created at: " + this.getInitialTime());
 
   }
 
@@ -121,6 +123,7 @@ public class Interval implements Observer {
 
     logger.debug("Updating inteval time");
     logger.trace("Interval total time: " + this.getTimeInterval());
+    logger.info("Interval total time: " + this.getTimeInterval());
   }
 
   @Override

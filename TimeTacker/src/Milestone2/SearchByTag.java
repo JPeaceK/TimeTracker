@@ -41,6 +41,7 @@ public class SearchByTag implements Visitor {
   public ArrayList<Activity> search(Activity activity) {
     activity.acceptVisitor(this);
     logger.debug("Searching tag: " + this.tag.toLowerCase());
+    logger.info("Searching tag: " + this.tag.toLowerCase());
     return getActivitiesWithTag();
   }
 
@@ -53,6 +54,7 @@ public class SearchByTag implements Visitor {
     }
 
     logger.debug("Searching " + task.getName() + " tags");
+    logger.info("Searching " + task.getName() + " tags");
   }
 
   @Override
@@ -70,6 +72,7 @@ public class SearchByTag implements Visitor {
     }
 
     logger.debug("Searching " + project.getName() + " tags");
+    logger.info("Searching " + project.getName() + " tags");
   }
 
   @Override

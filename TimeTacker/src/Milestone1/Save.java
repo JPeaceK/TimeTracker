@@ -37,6 +37,7 @@ public class Save implements Visitor {
 
     logger.debug("Save parameter constructor");
     logger.trace("Saving " + root + " at " + fileName);
+    logger.info("Saving " + root + " at " + fileName);
   }
 
   // We want to accept ROOT to sabe the whole tree.
@@ -44,6 +45,7 @@ public class Save implements Visitor {
   public void visitTask(Task task) {
 
     logger.trace("Saving " + task.getName());
+    logger.info("Saving " + task.getName());
 
     JSONObject json = new JSONObject();
 
@@ -78,6 +80,7 @@ public class Save implements Visitor {
   public void visitProject(Project project) {
 
     logger.trace("Saving " + project.getName());
+    logger.info("Saving " + project.getName());
 
     JSONObject json = new JSONObject();
 
@@ -118,6 +121,7 @@ public class Save implements Visitor {
   public void visitInterval(Interval interval) {
 
     logger.trace("Saving interval");
+    logger.info("Saving interval");
 
     JSONObject json = new JSONObject();
     json.put("type", "interval");
@@ -150,5 +154,6 @@ public class Save implements Visitor {
     }
 
     logger.debug("Writting JSON document");
+    logger.info("Writting JSON document");
   }
 }

@@ -39,6 +39,7 @@ public abstract class Activity {
     this.tags = new ArrayList<>();
 
     logger.debug("Activity " + this.getName() + " created");
+    logger.info("Activity " + this.getName() + " created");
     logger.trace("Tags size: 0");
   }
 

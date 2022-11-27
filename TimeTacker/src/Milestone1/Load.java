@@ -44,6 +44,7 @@ public class Load implements Visitor {
 
     logger.debug("Load parameter constructor");
     logger.trace("Loading " + fileName + " JSON");
+    logger.info("Loading " + fileName + " JSON");
   }
 
   /**
@@ -57,12 +58,14 @@ public class Load implements Visitor {
     root.acceptVisitor(this);
 
     logger.trace("Loading " + root.getName() + " tree");
+    logger.info("Loading " + root.getName() + " tree");
     return root;
   }
 
   @Override
   public void visitTask(Task task) {
 
+    logger.info("Loading task " + task.getName());
     logger.trace("Loading task " + task.getName());
 
     task.setName(jsonTree.getString("name"));
@@ -109,6 +112,7 @@ public class Load implements Visitor {
   @Override
   public void visitProject(Project project) {
 
+    logger.info("Loading " + project.getName());
     logger.trace("Loading " + project.getName());
 
     project.setName(jsonTree.getString("name"));
@@ -164,6 +168,7 @@ public class Load implements Visitor {
   @Override
   public void visitInterval(Interval interval) {
 
+    logger.info("Loading interval");
     logger.trace("Loading interval");
 
     interval.setTotalTime(jsonTree.getLong("totalTime"));

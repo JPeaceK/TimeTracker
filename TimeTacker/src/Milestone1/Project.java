@@ -35,8 +35,11 @@ public class Project extends Activity {
       this.father.addActivity(this);
       logger.debug("Project " + this.name + " child of "
               + this.getFather().getName());
+      logger.info("Project " + this.name + " child of "
+              + this.getFather().getName());
     } else {
       logger.debug("Project " + this.name + " child of null");
+      logger.info("Project " + this.name + " child of null");
     }
 
     logger.trace("Activities: 0");
@@ -147,6 +150,7 @@ public class Project extends Activity {
 
     logger.debug("Updating project time");
     logger.trace("Project total time: " + this.getTotalTime());
+    logger.info("Project total time: " + this.getTotalTime());
 
     assert (invariant());
   }
@@ -157,14 +161,14 @@ public class Project extends Activity {
     if (this.initialTime == null) {
       this.initialTime = this.clock.getActualTime();
       logger.trace("Project started for 1st time");
+      logger.info("Project started for 1st time");
     }
     if (this.father != null) {
       this.father.start();
     }
     logger.debug("Project " + this.getName() + " running");
+    logger.info("Project " + this.getName() + " running");
     logger.trace("Activities: " + this.getActivities().size());
-
-
 
     assert (invariant());
   }
@@ -195,6 +199,7 @@ public class Project extends Activity {
     assert (invariant());
     this.tags.add(tag.toLowerCase());
     logger.trace("Tag: " + tag.toLowerCase() + " added");
+    logger.info("Tag: " + tag.toLowerCase() + " added");
     logger.trace("Tags: " + this.getTags().size());
     //PostCondition
     assert (getTags() != null) : "TAGS STORE ERROR";

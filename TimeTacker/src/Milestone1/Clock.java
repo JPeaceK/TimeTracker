@@ -60,6 +60,7 @@ public class Clock extends Observable {
       clock = new Clock();
 
       logger.debug("First Clock instance created at: " + clock.getActualTime());
+      logger.info("First Clock instance created at: " + clock.getActualTime());
     }
     return clock;
   }

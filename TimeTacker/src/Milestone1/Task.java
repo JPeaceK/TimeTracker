@@ -34,6 +34,7 @@ public class Task extends Activity {
 
     logger.debug("Task parameter constructor");
     logger.trace("Task " + this.getName() + " child of " + this.getFather().getName());
+    logger.info("Task " + this.getName() + " child of " + this.getFather().getName());
     logger.trace("Intervals: 0");
 
     assert (invariant());
@@ -145,6 +146,7 @@ public class Task extends Activity {
 
     logger.debug("Updating task time");
     logger.debug("Task total time: " + this.getTotalTime());
+    logger.info("Task total time: " + this.getTotalTime());
 
     assert (invariant());
   }
@@ -159,6 +161,7 @@ public class Task extends Activity {
     if (this.initialTime == null) {
       this.initialTime = this.clock.getActualTime();
       logger.debug("Task started for 1st time");
+      logger.info("Task started for 1st time");
     }
 
     this.father.start();
@@ -167,6 +170,7 @@ public class Task extends Activity {
 
     logger.debug("Task " + this.getName() + " running");
     logger.debug("Intervals: " + this.getIntervals().size());
+    logger.info("Intervals: " + this.getIntervals().size());
 
     //PostConditions
     assert (this.intervals != null) : "START SHOULD CREATE AN INTERVAL";
@@ -191,7 +195,8 @@ public class Task extends Activity {
     clock.deleteObserver(this.intervals.get(this.intervals.size() - 1));
 
     logger.debug("Task " + this.getName() + " stopped");
-    logger.debug("Intervals: " + this.getIntervals().size());
+    logger.info("Task " + this.getName() + " stopped");
+    logger.trace("Intervals: " + this.getIntervals().size());
 
     //PostConditions
     assert (!this.active) : "STOP DIND'T WORK AS EXPECTED";
@@ -229,6 +234,7 @@ public class Task extends Activity {
 
     logger.debug("Tag: " + tag.toLowerCase() + " added");
     logger.trace("Tags: " + this.getTags().size());
+    logger.info("Tags: " + this.getTags().size());
     //PostCondition
     assert (getTags() != null) : "TAGS STORE ERROR";
   }

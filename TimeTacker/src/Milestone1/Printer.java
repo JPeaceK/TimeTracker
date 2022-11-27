@@ -15,12 +15,17 @@ public class Printer implements Visitor {
   public void visitTask(Task task) {
     logger.debug("activity:\t" + task.getName() + "\t" + task.getInitialTime() + "\t"
             + task.getFinalTime() + "\t" + task.getTotalTime());
+
+    logger.info("activity:\t" + task.getName() + "\t" + task.getInitialTime() + "\t"
+            + task.getFinalTime() + "\t" + task.getTotalTime());
     task.getFather().acceptVisitor(this);
   }
 
   @Override
   public void visitProject(Project project) {
     logger.debug("activity:\t" + project.getName() + "\t" + project.getInitialTime()
+            + "\t" + project.getFinalTime() + "\t" + project.getTotalTime());
+    logger.info("activity:\t" + project.getName() + "\t" + project.getInitialTime()
             + "\t" + project.getFinalTime() + "\t" + project.getTotalTime());
     if (project.getFather() != null) {
       project.getFather().acceptVisitor(this);
@@ -30,6 +35,8 @@ public class Printer implements Visitor {
   @Override
   public void visitInterval(Interval interval) {
     logger.debug("interval:\t" + interval.getInitialTime() + "\t"
+            + interval.getFinalTime() + "\t" + interval.getTimeInterval());
+    logger.info("interval:\t" + interval.getInitialTime() + "\t"
             + interval.getFinalTime() + "\t" + interval.getTimeInterval());
     interval.getFather().acceptVisitor(this);
   }
