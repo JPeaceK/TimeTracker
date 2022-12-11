@@ -69,7 +69,7 @@ public class Load implements Visitor {
     logger.trace("Loading task " + task.getName());
 
     task.setName(jsonTree.getString("name"));
-
+    task.setId(jsonTree.getInt("id"));
     task.setTotalTime(jsonTree.getLong("totalTime"));
 
     if (jsonTree.get("initialTime") == JSONObject.NULL) {
@@ -116,6 +116,7 @@ public class Load implements Visitor {
     logger.trace("Loading " + project.getName());
 
     project.setName(jsonTree.getString("name"));
+    project.setId(jsonTree.getInt("id"));
 
     project.setTotalTime(jsonTree.getLong("totalTime"));
 

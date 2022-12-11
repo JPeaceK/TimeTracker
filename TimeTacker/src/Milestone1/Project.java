@@ -2,6 +2,10 @@ package Milestone1;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.jar.JarEntry;
+
+import Milestone3.JsonTreeGenerator;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,7 +50,7 @@ public class Project extends Activity {
     assert (invariant());
   }
 
-  /**
+  /**pai
    * Default Project constructor.
    */
   public Project() {
@@ -107,10 +111,16 @@ public class Project extends Activity {
   }
 
   @Override
+  public void setId(int id) {this.id = id; }
+
+  @Override
   public String getName() {
     assert (invariant());
     return this.name;
   }
+
+  @Override
+  public int getId() { return this.id; }
 
   @Override
   public long getTotalTime() {
@@ -209,6 +219,14 @@ public class Project extends Activity {
     assert (invariant());
     return this.tags;
   }
+
+  @Override
+  public JSONObject toJson(int depth){
+    JsonTreeGenerator jsonTreeGenerator = new JsonTreeGenerator(depth, this);
+    return jsonTreeGenerator.generate();
+  }
+
+
 
   private boolean invariant() {
     assert (name != null) : "PROJECT MUST HAVE A NAME";

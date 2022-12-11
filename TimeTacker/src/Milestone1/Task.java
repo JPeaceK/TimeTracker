@@ -2,6 +2,9 @@ package Milestone1;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+
+import Milestone3.JsonTreeGenerator;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**
@@ -104,10 +107,16 @@ public class Task extends Activity {
   }
 
   @Override
+  public void setId(int id) {this.id = id; }
+
+  @Override
   public String getName() {
     assert (invariant());
     return this.name;
   }
+
+  @Override
+  public int getId() { return this.id; }
 
   @Override
   public LocalDateTime getFinalTime() {
@@ -242,6 +251,12 @@ public class Task extends Activity {
   public ArrayList<String> getTags() {
     assert (invariant());
     return this.tags;
+  }
+
+  @Override
+  public JSONObject toJson(int id){
+    JsonTreeGenerator jsonTreeGenerator = new JsonTreeGenerator(id, this);
+    return jsonTreeGenerator.generate();
   }
 
   private boolean invariant() {

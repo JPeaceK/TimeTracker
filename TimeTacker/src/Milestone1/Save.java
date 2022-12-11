@@ -50,6 +50,7 @@ public class Save implements Visitor {
     JSONObject json = new JSONObject();
 
     json.put("type", "task");
+    json.put("id", task.getId());
     json.put("name", task.getName());
     json.put("totalTime", task.getTotalTime());
     if (task.getInitialTime() != null) {
@@ -85,6 +86,7 @@ public class Save implements Visitor {
     JSONObject json = new JSONObject();
 
     json.put("type", "project");
+    json.put("id", project.getId());
     json.put("name", project.getName());
     json.put("totalTime", project.getTotalTime());
     if (project.getInitialTime() != null) {

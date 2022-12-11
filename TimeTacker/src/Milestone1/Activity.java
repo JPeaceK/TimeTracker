@@ -1,7 +1,10 @@
 package Milestone1;
 
+import Milestone3.IdCreator;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,6 +16,8 @@ public abstract class Activity {
   protected String name;
   protected LocalDateTime initialTime;
   protected long totalTime;
+
+  protected int id;
 
   protected Clock clock;
   protected LocalDateTime finalTime;
@@ -34,6 +39,7 @@ public abstract class Activity {
     this.clock = Clock.getInstance();
     this.name = name;
     this.father = father;
+    this.id = IdCreator.getId();
     this.totalTime = 0;
     this.initialTime = null;
     this.tags = new ArrayList<>();
@@ -55,7 +61,11 @@ public abstract class Activity {
 
   public abstract void setFather(Project father);
 
+  public abstract void setId(int id);
+
   public abstract String getName();
+
+  public abstract int getId();
 
   public abstract long getTotalTime();
 
@@ -70,5 +80,7 @@ public abstract class Activity {
   public abstract void addTag(String tag);
 
   public abstract void start();
+
+  public abstract JSONObject toJson(int id);
 
 }

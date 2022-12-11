@@ -1,6 +1,7 @@
 package Milestone1;
 
 import Milestone2.SearchByTag;
+import Milestone3.JsonTreeGenerator;
 
 import java.util.ArrayList;
 
@@ -64,6 +65,8 @@ public class Main {
       Thread.sleep(5000);
       //System.out.println("\nSaving json...\n");
       Save saver = new Save("data", root);
+      JsonTreeGenerator jtg = new JsonTreeGenerator(1, root);
+      System.out.println(jtg.generate());
       //System.out.println("\n---DONE---\n");
 
     } catch (InterruptedException e) {
@@ -125,6 +128,6 @@ public class Main {
   public static void main(String[] args) {
     testB(); //Saver test implemented too.
     //testLoad();
-    testTags();
+    //testTags();
   }
 }
