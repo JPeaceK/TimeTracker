@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Objects;
 import java.util.StringTokenizer;
 
 // Based on
@@ -25,7 +26,7 @@ public class WebServer {
 
   public WebServer(Activity root) {
     this.root = root;
-    System.out.println(root);
+    //System.out.println(root);
     currentActivity = root;
     try {
       ServerSocket serverConnect = new ServerSocket(PORT);
@@ -153,29 +154,31 @@ public class WebServer {
             Project project = (Project) activity;
             String tag = tokens[2];
             String name = tokens[3];
-            int option = Integer.parseInt(tokens[4]); //0 project, 1 task
+            String option = tokens[4];
 
-            String[] tags = tag.split(",%20");
+            name = name.replaceAll("%20", "_");
+            System.out.println(name + "---------------------------------");
+
+            String[] tags = tag.split("%20");
 
             switch (option) {
-              case 0:
+              case "Project":
                 Project newProject = new Project(name, project);
                 for (String s : tags) {
                   newProject.addTag(s);
                 }
                 break;
 
-                case 1:
+                case "Task":
                   Task newTask = new Task(name, project);
                   for (String s : tags) {
                     newTask.addTag(s);
                   }
-                break;
-              default:
-                break;
+                  break;
             }
 
           }
+          body = "";
         }
         // TODO: add new task, project
         // TODO: edit task, project properties

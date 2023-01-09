@@ -1,3 +1,5 @@
+import 'package:timetracker_app/add_activity.dart';
+import 'package:timetracker_app/info_page.dart';
 import 'package:timetracker_app/page_intervals.dart';
 import 'package:timetracker_app/tree.dart' hide getTree;
 // the old getTree()
@@ -18,7 +20,7 @@ class _PageActivitiesState extends State<PageActivities> {
   late int id;
   late Future<Tree> futureTree;
   late Timer _timer;
-  static const int periodeRefresh = 6;
+  static const int periodeRefresh = 1;
 
   @override
   void initState() {
@@ -38,20 +40,57 @@ class _PageActivitiesState extends State<PageActivities> {
     // split by '.' and taking first element of resulting list removes the microseconds part
     if (activity is Project) {
       return ListTile(
+        leading: Icon(Icons.create_new_folder_outlined),
         title: Text('${activity.name}'),
-        trailing: Text('$strDuration'),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+          IconButton(
+            icon: Icon(Icons.info_outline_rounded),
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => PageInfo(activity)));
+            },
+          ), Text('$strDuration'),
+          ],
+        ),
         onTap: () => _navigateDownActivities(activity.id),
       );
-    } else { //(activity is Task) {
+    } else { //if(activity is Task) {
       Task task = activity as Task;
       // at the moment is the same, maybe changes in the future
       Widget trailing;
-      trailing = Text('$strDuration');
+      trailing = Text('$strDuration',
+        style: TextStyle(color: task.active ? Colors.lightGreen : Colors.black));
 
       return ListTile(
-        title: Text('${activity.name}'),
-        trailing: trailing,
+        //leading: Icon(Icons.tiktok),
+        title: Text('${activity.name}',
+            style: TextStyle(color: task.active ? Colors.lightGreen : Colors.black)),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              icon: Icon(Icons.info_outline_rounded),
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => PageInfo(activity)));
+              },
+            ), trailing,
+          ],
+        ),
+        //tileColor: task.active ? Colors.yellow : Colors.transparent,
         onTap: () => _navigateDownIntervals(activity.id),
+        leading: IconButton(
+          icon: Icon((activity).active ? Icons.pause : Icons.play_arrow),
+          onPressed: () {
+            if ((activity).active) {
+              stop(activity.id);
+              _refresh(); // to show immediately that task has started
+            } else {
+              start(activity.id);
+              _refresh();
+            }
+          }
+        ),
         onLongPress: () {
           if ((activity as Task).active) {
             stop(activity.id);
@@ -77,8 +116,15 @@ class _PageActivitiesState extends State<PageActivities> {
         if (snapshot.hasData) {
           return Scaffold(
             appBar: AppBar(
-              title: Text(snapshot.data!.root.name),
+              title: Text("TimeTracker"),
               actions: <Widget>[
+
+                IconButton(icon: Icon(Icons.info_outline_rounded),
+                  onPressed: (){
+                    Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => PageInfo(snapshot.data!.root.children[id])));
+                  },
+                ),
+
                 IconButton(icon: Icon(Icons.home),
                     onPressed: () {
                       while(Navigator.of(context).canPop()) {
@@ -86,8 +132,8 @@ class _PageActivitiesState extends State<PageActivities> {
                         Navigator.of(context).pop();
                       }
                       /* this works also:
-  Navigator.popUntil(context, ModalRoute.withName('/'));
-  */
+                        Navigator.popUntil(context, ModalRoute.withName('/'));
+                      */
                       PageActivities(0);
                     }),
                 //TODO other actions
@@ -101,6 +147,13 @@ class _PageActivitiesState extends State<PageActivities> {
                   _buildRow(snapshot.data!.root.children[index], index),
               separatorBuilder: (BuildContext context, int index) =>
               const Divider(),
+            ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: (){
+                _navigateCreateNewActivity(snapshot.data!.root.id);
+              },
+              backgroundColor: Colors.yellow,
+              child: const Icon(Icons.add_rounded),
             ),
           );
         } else if (snapshot.hasError) {
@@ -137,6 +190,15 @@ void _navigateDownIntervals(int childId) {
     _refresh();
   });
   //https://stackoverflow.com/questions/49830553/how-to-go-back-and-refresh-the-previous-page-in-flutter?noredirect=1&lq=1
+}
+
+  void _navigateCreateNewActivity(int id){
+  _timer.cancel();
+  Navigator.of(context).push(MaterialPageRoute<void>(
+      builder:(context)=>AddActivity(id))).then((var value){
+        _activateTimer();
+        _refresh();
+  });
 }
 
 

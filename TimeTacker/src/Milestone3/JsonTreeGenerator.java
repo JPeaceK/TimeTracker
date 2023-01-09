@@ -33,20 +33,20 @@ public class JsonTreeGenerator implements Visitor {
 
     JSONObject json = new JSONObject();
     json.put("intervals", intervals);
-    json.put("type", "task");
+    json.put("class", "task");
     json.put("id", task.getId());
     json.put("name", task.getName());
-    json.put("totalTime", task.getTotalTime());
+    json.put("duration", task.getTotalTime());
     if (task.getInitialTime() != null) {
-      json.put("initialTime", task.getInitialTime());
+      json.put("initialDate ", task.getInitialTime());
     } else {
-      json.put("initialTime", JSONObject.NULL);
+      json.put("initialDate", JSONObject.NULL);
     }
 
     if (task.getFinalTime() != null) {
-      json.put("finalTime", task.getFinalTime());
+      json.put("finalDate", task.getFinalTime());
     } else {
-      json.put("finalTime", JSONObject.NULL);
+      json.put("finalDate", JSONObject.NULL);
     }
     json.put("active", task.getActive());
 
@@ -69,20 +69,20 @@ public class JsonTreeGenerator implements Visitor {
     }
 
     json.put("activities", activities);
-    json.put("type", "project");
+    json.put("class", "project");
     json.put("id", project.getId());
     json.put("name", project.getName());
-    json.put("totalTime", project.getTotalTime());
+    json.put("duration", project.getTotalTime());
     if (project.getInitialTime() != null) {
-      json.put("initialTime", project.getInitialTime());
+      json.put("initialDate", project.getInitialTime());
     } else {
-      json.put("initialTime", JSONObject.NULL);
+      json.put("initialDate", JSONObject.NULL);
     }
 
     if (project.getFinalTime() != null) {
-      json.put("finalTime", project.getFinalTime());
+      json.put("finalDate", project.getFinalTime());
     } else {
-      json.put("finalTime", JSONObject.NULL);
+      json.put("finalDate", JSONObject.NULL);
     }
     this.depth = depthAux;
     this.jsonTree = json;
@@ -92,18 +92,18 @@ public class JsonTreeGenerator implements Visitor {
   public void visitInterval(Interval interval) {
 
     JSONObject json = new JSONObject();
-    json.put("type", "interval");
-    json.put("totalTime", interval.getTimeInterval());
+    json.put("class", "interval");
+    json.put("duration", interval.getTimeInterval());
     if (interval.getInitialTime() != null) {
-      json.put("initialTime", interval.getInitialTime());
+      json.put("initialDate", interval.getInitialTime());
     } else {
-      json.put("initialTime", JSONObject.NULL);
+      json.put("initialDate", JSONObject.NULL);
     }
 
     if (interval.getFinalTime() != null) {
-      json.put("finalTime", interval.getFinalTime());
+      json.put("finalDate", interval.getFinalTime());
     } else {
-      json.put("finalTime", JSONObject.NULL);
+      json.put("finalDate", JSONObject.NULL);
     }
 
     json.put("active", interval.getActive());

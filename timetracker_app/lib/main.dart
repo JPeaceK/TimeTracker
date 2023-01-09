@@ -11,11 +11,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'TimeTracker',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        fontFamily: 'Poppins',
+        primarySwatch: Colors.yellow,
         textTheme: const TextTheme(
             subtitle1: TextStyle(fontSize:20.0),
             bodyText2:TextStyle(fontSize:20.0)),
       ),
+
         home: PageActivities(0) //PageIntervals()
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:timetracker_app/page_activities.dart';
 import 'package:timetracker_app/tree.dart' as Tree hide getTree;
 // to avoid collision with an Interval class in another library
 import 'package:timetracker_app/requests.dart';
@@ -50,8 +51,17 @@ class _PageIntervalsState extends State<PageIntervals> {
               title: Text(snapshot.data!.root.name),
               actions: <Widget>[
                 IconButton(icon: Icon(Icons.home),
-                  onPressed: () {}, // TODO
-                )
+                    onPressed: () {
+                      while(Navigator.of(context).canPop()) {
+                        print("pop");
+                        Navigator.of(context).pop();
+                      }
+                      /* this works also:
+  Navigator.popUntil(context, ModalRoute.withName('/'));
+  */
+                      PageActivities(0);
+                    }),
+                //TODO other actions
               ],
             ),
             body: ListView.separated(
